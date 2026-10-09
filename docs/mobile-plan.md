@@ -13,10 +13,11 @@ Status: langkah 1-2 selesai (2026-10-09). Ubah dokumen ini kalau user memutuskan
 - `scr_m_noaccess` (prefix Na): pesan beda untuk belum terdaftar / belum punya BL, daftar admin + tombol email, tombol
   "Check again" (Refresh dis_users, lalu ke Consume kalau akses sudah ada).
 - Screen1 bawaan masih ada (tidak terpakai): hapus manual di Studio.
-- `scr_m_consume`: search + reset/refresh, dropdown Category & Area, galeri kartu (`galCons`, posisi X/Y tanpa
-  container di baris) dengan stepper - / angka / +. Pilihan qty disimpan di koleksi `colConsSel {stockId, amt}` (tetap
-  ada saat filter berubah/pindah tab). Bar bawah `conConsBar` (ringkasan, Clear, Consume) -> lembar konfirmasi
-  `conConsDlg` (`locConsConfirm`) berisi daftar item; tombol `btnConsDlgOk` = logika kontrak (stok dibaca terbaru).
+- `scr_m_consume` (gaya e-commerce): search pill + reset/refresh, chip kategori (`btnConsCatAll` + galeri horizontal
+  `galConsCat`, state `locConsCat`), dropdown Area, grid 2 kolom `galCons` (latar kartu `conConsCard` ManualLayout tanpa
+  anak, foto, badge stok di atas foto, nama, BPN, area, tombol Add -> stepper - / angka / +). Pilihan qty di koleksi
+  `colConsSel {stockId, amt}`. Bar keranjang mengambang `conConsCart` (muncul bila ada pilihan) -> lembar konfirmasi
+  `conConsDlg` (`locConsConfirm`); `btnConsDlgOk` = logika kontrak (stok dibaca terbaru).
 
 ## Tujuan
 Teknisi di lapangan bisa: mengambil (consume) barang dari stok area BL-nya, mencari barang, melihat riwayat, dan

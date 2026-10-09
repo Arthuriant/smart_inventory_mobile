@@ -38,3 +38,9 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   1. Find/History/Dashboard memang masih kerangka (langkah 3-5). Connect ulang, kirim ulang scr_m_consume. Screen1
   sudah dihapus user di Studio -> dihapus juga dari app/. | status: compile OK, sync ulang berisi Consume lengkap |
   cek manual: File > Save SEGERA setelah Studio tampil, jangan refresh sebelumnya.
+- [2026-10-09] scr_m_consume.pa.yaml, CLAUDE.md (aturan #11) | Restyle Consume gaya e-commerce (permintaan user, tetap
+  ringan): search pill, chip kategori (ganti dropdown Category), dropdown Area 1 baris, grid kartu 2 kolom dengan foto
+  besar + badge stok + tombol Add yang berubah jadi stepper, bar keranjang navy mengambang, lembar konfirmasi dengan
+  handle + thumbnail. Logika simpan tidak berubah. Masalah: compile pertama menaruh kontrol baru di akhir parent (chip di
+  bawah daftar, latar kartu menimpa isi) -> compile kedua file yang sama memperbaiki urutan. | status: compile OK, urutan
+  terverifikasi lewat sync | cek manual: Save; cek chip aktif, kartu (foto terlihat), Add -> stepper, bar keranjang.

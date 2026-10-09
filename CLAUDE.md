@@ -89,6 +89,9 @@ Area tidak wajib dipilih untuk Consume (filter area hanya untuk menyaring tampil
    delegable; aman selama dis_stocks < 500 baris.
 10. Gejala "binding" Studio setelah compile (Fill hitam, dropdown form tidak bisa memilih) BUKAN kesalahan YAML:
     minta user ketik ulang rumus / hapus "Depends on" di Studio, lalu Save. Jangan ubah struktur YAML untuknya.
+11. **Urutan kontrol baru**: compile pertama menaruh kontrol BARU di akhir parent-nya (urutan YAML diabaikan; di galeri
+    ManualLayout ini juga z-order, mis. latar kartu menimpa isi). Setelah compile yang menambah kontrol, sync dan cek
+    urutan; kalau salah, compile file yang sama sekali lagi (kontrol yang sudah ada mengikuti urutan YAML).
 
 ## Sync & compile (WAJIB)
 - `sync_canvas` dulu sebelum mengedit, ke folder sementara baru di scratchpad (bukan `app/`), lalu bandingkan dengan

@@ -41,7 +41,7 @@ Screens:
                   LayoutGap: =10
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
-                  PaddingBottom: =8
+                  PaddingBottom: =0
                   PaddingLeft: =16
                   PaddingRight: =16
                   PaddingTop: =12
@@ -58,7 +58,7 @@ Screens:
                         Height: =44
                         LayoutAlignItems: =LayoutAlignItems.Center
                         LayoutDirection: =LayoutDirection.Horizontal
-                        LayoutGap: =8
+                        LayoutGap: =4
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         RadiusBottomLeft: =0
@@ -71,16 +71,18 @@ Screens:
                             Properties:
                               AccessibleLabel: ="Search item"
                               Appearance: =Appearance.Outline
+                              BorderColor: =RGBA(226, 230, 239, 1)
                               FillPortions: =1
                               Font: =Font.'Segoe UI'
                               Height: =44
                               LayoutMinHeight: =0
                               LayoutMinWidth: =0
-                              Placeholder: ="Search name or BPN"
-                              RadiusBottomLeft: =8
-                              RadiusBottomRight: =8
-                              RadiusTopLeft: =8
-                              RadiusTopRight: =8
+                              PaddingLeft: =16
+                              Placeholder: ="Search item name or BPN"
+                              RadiusBottomLeft: =22
+                              RadiusBottomRight: =22
+                              RadiusTopLeft: =22
+                              RadiusTopRight: =22
                               Size: =14
                               TriggerOutput: =TriggerOutput.Delayed
                               Type: =TextInputType.Search
@@ -89,16 +91,20 @@ Screens:
                             Properties:
                               AccessibleLabel: ="Reset filter"
                               Appearance: =ButtonAppearance.Subtle
-                              Color: =RGBA(100, 112, 130, 1)
+                              Color: =RGBA(0, 18, 107, 1)
                               Height: =44
                               Icon: ="ArrowReset"
                               Layout: =ButtonLayout.IconOnly
                               LayoutMinHeight: =0
                               LayoutMinWidth: =0
                               OnSelect: |-
-                                =Reset(ddConsCat);
-                                Reset(ddConsArea);
-                                Reset(inpConsSearch)
+                                =Reset(ddConsArea);
+                                Reset(inpConsSearch);
+                                UpdateContext({locConsCat: Blank()})
+                              RadiusBottomLeft: =22
+                              RadiusBottomRight: =22
+                              RadiusTopLeft: =22
+                              RadiusTopRight: =22
                               Size: =18
                               Text: ="Reset filter"
                               Width: =44
@@ -107,22 +113,97 @@ Screens:
                             Properties:
                               AccessibleLabel: ="Refresh stock"
                               Appearance: =ButtonAppearance.Subtle
-                              Color: =RGBA(100, 112, 130, 1)
+                              Color: =RGBA(0, 18, 107, 1)
                               Height: =44
                               Icon: ="ArrowSync"
                               Layout: =ButtonLayout.IconOnly
                               LayoutMinHeight: =0
                               LayoutMinWidth: =0
-                              OnSelect: =Refresh(dis_stocks)
+                              OnSelect: |-
+                                =Refresh(dis_stocks)
+                              RadiusBottomLeft: =22
+                              RadiusBottomRight: =22
+                              RadiusTopLeft: =22
+                              RadiusTopRight: =22
                               Size: =18
                               Text: ="Refresh stock"
                               Width: =44
+                  - conConsChipRow:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        Height: =36
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =6
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - btnConsCatAll:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="All categories"
+                              Appearance: =If(IsBlank(locConsCat), ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locConsCat: Blank()})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="All"
+                              Width: =60
+                        - galConsCat:
+                            Control: Gallery
+                            Variant: Horizontal
+                            Properties:
+                              AccessibleLabel: ="Category filter"
+                              FillPortions: =1
+                              Height: =36
+                              Items: =Sort(dis_category_items, code)
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              Selectable: =false
+                              ShowScrollbar: =false
+                              TemplatePadding: =0
+                              TemplateSize: =116
+                            Children:
+                              - btnConsChip:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Category " & ThisItem.code
+                                    Appearance: =If(locConsCat.dis_category_item = ThisItem.dis_category_item, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                                    BasePaletteColor: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =34
+                                    OnSelect: |-
+                                      =UpdateContext({locConsCat: ThisItem})
+                                    RadiusBottomLeft: =17
+                                    RadiusBottomRight: =17
+                                    RadiusTopLeft: =17
+                                    RadiusTopRight: =17
+                                    Size: =12
+                                    Text: =ThisItem.code
+                                    Width: =Parent.TemplateWidth - 6
+                                    X: =3
+                                    Y: =1
                   - conConsDdRow:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
                         DropShadow: =DropShadow.None
-                        Height: =66
+                        Height: =40
                         LayoutAlignItems: =LayoutAlignItems.Stretch
                         LayoutDirection: =LayoutDirection.Horizontal
                         LayoutGap: =8
@@ -133,65 +214,15 @@ Screens:
                         RadiusTopLeft: =0
                         RadiusTopRight: =0
                       Children:
-                        - conConsCatFld:
-                            Control: GroupContainer
-                            Variant: AutoLayout
-                            Properties:
-                              DropShadow: =DropShadow.None
-                              FillPortions: =1
-                              LayoutAlignItems: =LayoutAlignItems.Stretch
-                              LayoutDirection: =LayoutDirection.Vertical
-                              LayoutGap: =4
-                              LayoutMinHeight: =0
-                              LayoutMinWidth: =0
-                              RadiusBottomLeft: =0
-                              RadiusBottomRight: =0
-                              RadiusTopLeft: =0
-                              RadiusTopRight: =0
-                            Children:
-                              - txtConsCatLbl:
-                                  Control: ModernText
-                                  Properties:
-                                    AlignInContainer: =AlignInContainer.Stretch
-                                    Color: =RGBA(100, 112, 130, 1)
-                                    Font: =Font.'Segoe UI'
-                                    FontWeight: =FontWeight.Semibold
-                                    Height: =18
-                                    LayoutMinHeight: =0
-                                    LayoutMinWidth: =0
-                                    PaddingBottom: =0
-                                    PaddingLeft: =0
-                                    PaddingRight: =0
-                                    PaddingTop: =0
-                                    Size: =11
-                                    Text: ="Category"
-                                    Wrap: =false
-                              - ddConsCat:
-                                  Control: ModernDropdown
-                                  Properties:
-                                    AccessibleLabel: ="Filter category"
-                                    AlignInContainer: =AlignInContainer.Stretch
-                                    Appearance: =Appearance.Outline
-                                    Font: =Font.'Segoe UI'
-                                    Height: =44
-                                    ItemDisplayText: =ThisItem.code
-                                    Items: =dis_category_items
-                                    LayoutMinHeight: =0
-                                    LayoutMinWidth: =0
-                                    RadiusBottomLeft: =8
-                                    RadiusBottomRight: =8
-                                    RadiusTopLeft: =8
-                                    RadiusTopRight: =8
-                                    Size: =14
                         - conConsAreaFld:
                             Control: GroupContainer
                             Variant: AutoLayout
                             Properties:
                               DropShadow: =DropShadow.None
                               FillPortions: =1
-                              LayoutAlignItems: =LayoutAlignItems.Stretch
-                              LayoutDirection: =LayoutDirection.Vertical
-                              LayoutGap: =4
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =8
                               LayoutMinHeight: =0
                               LayoutMinWidth: =0
                               RadiusBottomLeft: =0
@@ -202,37 +233,39 @@ Screens:
                               - txtConsAreaLbl:
                                   Control: ModernText
                                   Properties:
-                                    AlignInContainer: =AlignInContainer.Stretch
                                     Color: =RGBA(100, 112, 130, 1)
                                     Font: =Font.'Segoe UI'
                                     FontWeight: =FontWeight.Semibold
-                                    Height: =18
+                                    Height: =40
                                     LayoutMinHeight: =0
                                     LayoutMinWidth: =0
                                     PaddingBottom: =0
-                                    PaddingLeft: =0
+                                    PaddingLeft: =4
                                     PaddingRight: =0
                                     PaddingTop: =0
-                                    Size: =11
+                                    Size: =12
                                     Text: ="Area"
+                                    VerticalAlign: =VerticalAlign.Middle
+                                    Width: =44
                                     Wrap: =false
                               - ddConsArea:
                                   Control: ModernDropdown
                                   Properties:
                                     AccessibleLabel: ="Filter area"
-                                    AlignInContainer: =AlignInContainer.Stretch
                                     Appearance: =Appearance.Outline
+                                    BorderColor: =RGBA(226, 230, 239, 1)
+                                    FillPortions: =1
                                     Font: =Font.'Segoe UI'
-                                    Height: =44
+                                    Height: =40
                                     ItemDisplayText: =ThisItem.Name
                                     Items: =Sort(nfMyAreas, Name)
                                     LayoutMinHeight: =0
                                     LayoutMinWidth: =0
-                                    RadiusBottomLeft: =8
-                                    RadiusBottomRight: =8
-                                    RadiusTopLeft: =8
-                                    RadiusTopRight: =8
-                                    Size: =14
+                                    RadiusBottomLeft: =20
+                                    RadiusBottomRight: =20
+                                    RadiusTopLeft: =20
+                                    RadiusTopRight: =20
+                                    Size: =13
                   - galCons:
                       Control: Gallery
                       Variant: Vertical
@@ -243,7 +276,7 @@ Screens:
                           =Filter(
                               dis_stocks,
                               // Category filter (optional)
-                              IsBlank(ddConsCat.Selected) Or dis_item_v2.dis_category_item.dis_category_item = ddConsCat.Selected.dis_category_item,
+                              IsBlank(locConsCat) Or dis_item_v2.dis_category_item.dis_category_item = locConsCat.dis_category_item,
                               // Area filter (optional, display only)
                               IsBlank(ddConsArea.Selected) Or dis_area.dis_area = ddConsArea.Selected.dis_area,
                               // Access: only areas of the user's business line
@@ -257,84 +290,143 @@ Screens:
                         LayoutMinWidth: =0
                         Selectable: =false
                         ShowScrollbar: =false
-                        TemplateFill: =If(Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0, RGBA(232, 238, 252, 1), RGBA(255, 255, 255, 1))
-                        TemplatePadding: =4
-                        TemplateSize: =148
+                        TemplateFill: =RGBA(0, 0, 0, 0)
+                        TemplatePadding: =5
+                        TemplateSize: =296
                         Visible: =!IsEmpty(galCons.AllItems)
+                        WrapCount: =2
                       Children:
+                        - conConsCard:
+                            Control: GroupContainer
+                            Variant: ManualLayout
+                            Properties:
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =RGBA(255, 255, 255, 1)
+                              Height: =Parent.TemplateHeight
+                              RadiusBottomLeft: =14
+                              RadiusBottomRight: =14
+                              RadiusTopLeft: =14
+                              RadiusTopRight: =14
+                              Width: =Parent.TemplateWidth
+                              X: =0
+                              Y: =0
                         - imgConsItem:
                             Control: Image
                             Properties:
                               AccessibleLabel: ="Photo " & ThisItem.dis_item_v2.name
-                              Fill: =RGBA(241, 244, 250, 1)
-                              Height: =88
+                              Fill: =RGBA(244, 246, 250, 1)
+                              Height: =140
+                              HoverFill: =RGBA(244, 246, 250, 1)
                               Image: =ThisItem.dis_item_v2.Image
-                              PaddingBottom: =4
-                              PaddingLeft: =4
-                              PaddingRight: =4
-                              PaddingTop: =4
-                              RadiusBottomLeft: =8
-                              RadiusBottomRight: =8
-                              RadiusTopLeft: =8
-                              RadiusTopRight: =8
-                              Width: =88
-                              X: =12
-                              Y: =12
+                              ImagePosition: =ImagePosition.Fit
+                              PaddingBottom: =8
+                              PaddingLeft: =8
+                              PaddingRight: =8
+                              PaddingTop: =8
+                              PressedFill: =RGBA(244, 246, 250, 1)
+                              RadiusBottomLeft: =10
+                              RadiusBottomRight: =10
+                              RadiusTopLeft: =10
+                              RadiusTopRight: =10
+                              Width: =Parent.TemplateWidth - 16
+                              X: =8
+                              Y: =8
+                        - bdgConsStock:
+                            Control: Badge
+                            Properties:
+                              AccessibleLabel: ="Stock " & Text(ThisItem.qty)
+                              Appearance: ='BadgeCanvas.Appearance'.Filled
+                              Content: |-
+                                =If(ThisItem.qty <= 0, "Out of stock", ThisItem.qty < ThisItem.dis_item_v2.min_qty, "Low  ·  " & Text(ThisItem.qty), "Stock " & Text(ThisItem.qty) & " " & Text(ThisItem.dis_item_v2.uom))
+                              FontSize: =11
+                              FontWeight: =FontWeight.Semibold
+                              Height: =24
+                              Shape: ='BadgeCanvas.Shape'.Circular
+                              ThemeColor: =If(ThisItem.qty <= 0, 'BadgeCanvas.ThemeColor'.Danger, ThisItem.qty < ThisItem.dis_item_v2.min_qty, 'BadgeCanvas.ThemeColor'.Warning, 'BadgeCanvas.ThemeColor'.Success)
+                              Width: =124
+                              X: =14
+                              Y: =14
                         - txtConsName:
                             Control: ModernText
                             Properties:
                               Color: =RGBA(31, 41, 55, 1)
                               Font: =Font.'Segoe UI'
                               FontWeight: =FontWeight.Semibold
-                              Height: =42
+                              Height: =40
                               PaddingBottom: =0
                               PaddingLeft: =0
                               PaddingRight: =0
                               PaddingTop: =0
-                              Size: =14
+                              Size: =13
                               Text: =ThisItem.dis_item_v2.name
                               VerticalAlign: =VerticalAlign.Top
-                              Width: =Parent.TemplateWidth - 124
-                              X: =112
-                              Y: =10
+                              Width: =Parent.TemplateWidth - 24
+                              X: =12
+                              Y: =156
                         - txtConsMeta:
                             Control: ModernText
                             Properties:
                               Color: =RGBA(100, 112, 130, 1)
                               Font: =Font.'Segoe UI'
-                              Height: =20
+                              Height: =18
                               PaddingBottom: =0
                               PaddingLeft: =0
                               PaddingRight: =0
                               PaddingTop: =0
-                              Size: =12
-                              Text: ="BPN " & Coalesce(ThisItem.dis_item_v2.part_number, "-") & "  ·  " & ThisItem.dis_area.Name
-                              Width: =Parent.TemplateWidth - 124
+                              Size: =11
+                              Text: ="BPN " & Coalesce(ThisItem.dis_item_v2.part_number, "-")
+                              Width: =Parent.TemplateWidth - 24
                               Wrap: =false
-                              X: =112
-                              Y: =54
-                        - bdgConsStock:
-                            Control: Badge
+                              X: =12
+                              Y: =198
+                        - txtConsArea:
+                            Control: ModernText
                             Properties:
-                              AccessibleLabel: ="Stock " & Text(ThisItem.qty)
-                              Appearance: ='BadgeCanvas.Appearance'.Tint
-                              Content: ="Stock " & Text(ThisItem.qty) & " " & Text(ThisItem.dis_item_v2.uom)
-                              FontSize: =12
+                              Color: =RGBA(56, 96, 178, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =18
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =11
+                              Text: =ThisItem.dis_area.Name
+                              Width: =Parent.TemplateWidth - 24
+                              Wrap: =false
+                              X: =12
+                              Y: =218
+                        - btnConsAdd:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Add " & ThisItem.dis_item_v2.name
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              DisplayMode: =If(ThisItem.qty <= 0, DisplayMode.Disabled, DisplayMode.Edit)
+                              Font: =Font.'Segoe UI'
                               FontWeight: =FontWeight.Semibold
-                              Height: =26
-                              Shape: ='BadgeCanvas.Shape'.Rounded
-                              ThemeColor: =If(ThisItem.qty <= 0, 'BadgeCanvas.ThemeColor'.Danger, ThisItem.qty < ThisItem.dis_item_v2.min_qty, 'BadgeCanvas.ThemeColor'.Warning, 'BadgeCanvas.ThemeColor'.Informative)
-                              Width: =140
-                              X: =112
-                              Y: =101
+                              Height: =40
+                              Icon: =If(ThisItem.qty <= 0, "", "Add")
+                              OnSelect: |-
+                                =RemoveIf(colConsSel, stockId = ThisItem.dis_stock);
+                                Collect(colConsSel, {stockId: ThisItem.dis_stock, amt: 1})
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Size: =13
+                              Text: =If(ThisItem.qty <= 0, "Out of stock", "Add")
+                              Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) <= 0
+                              Width: =Parent.TemplateWidth - 24
+                              X: =12
+                              Y: =246
                         - btnConsMinus:
                             Control: ModernButton
                             Properties:
                               AccessibleLabel: ="Decrease qty " & ThisItem.dis_item_v2.name
                               Appearance: =ButtonAppearance.Subtle
                               Color: =RGBA(0, 18, 107, 1)
-                              DisplayMode: =If(Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) <= 0, DisplayMode.Disabled, DisplayMode.Edit)
-                              Height: =44
+                              Height: =40
                               Icon: ="Subtract"
                               Layout: =ButtonLayout.IconOnly
                               OnSelect: |-
@@ -343,11 +435,16 @@ Screens:
                                     RemoveIf(colConsSel, stockId = ThisItem.dis_stock);
                                     If(cur > 1, Collect(colConsSel, {stockId: ThisItem.dis_stock, amt: Min(cur - 1, ThisItem.qty)}))
                                 )
-                              Size: =18
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Size: =16
                               Text: ="Decrease"
-                              Width: =44
-                              X: =Parent.TemplateWidth - 192
-                              Y: =92
+                              Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0
+                              Width: =40
+                              X: =12
+                              Y: =246
                         - numConsQty:
                             Control: ModernNumberInput
                             Properties:
@@ -355,24 +452,24 @@ Screens:
                               Align: =Align.Center
                               Appearance: =Appearance.Outline
                               Default: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0)
-                              DisplayMode: =If(ThisItem.qty <= 0, DisplayMode.Disabled, DisplayMode.Edit)
                               Font: =Font.'Segoe UI'
-                              FontWeight: =FontWeight.Semibold
-                              Height: =44
+                              FontWeight: =FontWeight.Bold
+                              Height: =40
                               Min: =0
                               OnChange: |-
                                 =RemoveIf(colConsSel, stockId = ThisItem.dis_stock);
                                 If(Self.Value > 0, Collect(colConsSel, {stockId: ThisItem.dis_stock, amt: Self.Value}))
                               Precision: =DecimalPrecision.'0'
-                              RadiusBottomLeft: =8
-                              RadiusBottomRight: =8
-                              RadiusTopLeft: =8
-                              RadiusTopRight: =8
-                              Size: =16
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Size: =15
                               ValidationState: =If(Self.Value > ThisItem.qty Or Self.Value < 0, ValidationState.Error, ValidationState.None)
-                              Width: =88
-                              X: =Parent.TemplateWidth - 144
-                              Y: =92
+                              Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0
+                              Width: =Parent.TemplateWidth - 112
+                              X: =56
+                              Y: =246
                         - btnConsPlus:
                             Control: ModernButton
                             Properties:
@@ -380,7 +477,7 @@ Screens:
                               Appearance: =ButtonAppearance.Subtle
                               Color: =RGBA(0, 18, 107, 1)
                               DisplayMode: =If(Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) >= ThisItem.qty, DisplayMode.Disabled, DisplayMode.Edit)
-                              Height: =44
+                              Height: =40
                               Icon: ="Add"
                               Layout: =ButtonLayout.IconOnly
                               OnSelect: |-
@@ -389,11 +486,16 @@ Screens:
                                     RemoveIf(colConsSel, stockId = ThisItem.dis_stock);
                                     Collect(colConsSel, {stockId: ThisItem.dis_stock, amt: Min(cur + 1, ThisItem.qty)})
                                 )
-                              Size: =18
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Size: =16
                               Text: ="Increase"
-                              Width: =44
+                              Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0
+                              Width: =40
                               X: =Parent.TemplateWidth - 52
-                              Y: =92
+                              Y: =246
                   - txtConsEmpty:
                       Control: ModernText
                       Properties:
@@ -407,86 +509,105 @@ Screens:
                         Size: =14
                         Text: ="No stock matches the filter."
                         Visible: =IsEmpty(galCons.AllItems)
-            - conConsBar:
+            - conConsCart:
                 Control: GroupContainer
                 Variant: AutoLayout
                 Properties:
-                  BorderColor: =RGBA(226, 230, 239, 1)
-                  BorderThickness: =1
                   DropShadow: =DropShadow.None
-                  Fill: =RGBA(255, 255, 255, 1)
-                  Height: =68
-                  LayoutAlignItems: =LayoutAlignItems.Center
-                  LayoutDirection: =LayoutDirection.Horizontal
-                  LayoutGap: =8
+                  Height: =80
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
+                  PaddingBottom: =8
                   PaddingLeft: =16
                   PaddingRight: =16
+                  PaddingTop: =8
                   RadiusBottomLeft: =0
                   RadiusBottomRight: =0
                   RadiusTopLeft: =0
                   RadiusTopRight: =0
+                  Visible: =CountIf(colConsSel, amt > 0) > 0
                 Children:
-                  - txtConsSum:
-                      Control: ModernText
+                  - conConsCartIn:
+                      Control: GroupContainer
+                      Variant: AutoLayout
                       Properties:
-                        Color: =RGBA(31, 41, 55, 1)
+                        DropShadow: =DropShadow.Semibold
+                        Fill: =RGBA(0, 18, 107, 1)
                         FillPortions: =1
-                        Font: =Font.'Segoe UI'
-                        FontWeight: =FontWeight.Semibold
-                        Height: =44
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =6
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =14
-                        Text: |-
-                          =With({n: CountIf(colConsSel, amt > 0), m: Sum(colConsSel, amt)}, If(n = 0, "No item selected", Text(n) & " item(s)  ·  " & Text(m) & " pcs"))
-                        VerticalAlign: =VerticalAlign.Middle
-                  - btnConsClear:
-                      Control: ModernButton
-                      Properties:
-                        AccessibleLabel: ="Clear selected quantities"
-                        Appearance: =ButtonAppearance.Subtle
-                        DisplayMode: =If(CountIf(colConsSel, amt > 0) = 0, DisplayMode.Disabled, DisplayMode.Edit)
-                        Font: =Font.'Segoe UI'
-                        Height: =44
-                        LayoutMinHeight: =0
-                        LayoutMinWidth: =0
-                        OnSelect: =Clear(colConsSel)
-                        Size: =14
-                        Text: ="Clear"
-                        Width: =84
-                  - btnConsSubmit:
-                      Control: ModernButton
-                      Properties:
-                        AccessibleLabel: ="Consume selected items"
-                        BasePaletteColor: =RGBA(0, 18, 107, 1)
-                        DisplayMode: =If(CountIf(colConsSel, amt > 0) = 0, DisplayMode.Disabled, DisplayMode.Edit)
-                        Font: =Font.'Segoe UI'
-                        FontWeight: =FontWeight.Semibold
-                        Height: =44
-                        Icon: ="Cart"
-                        LayoutMinHeight: =0
-                        LayoutMinWidth: =0
-                        OnSelect: |-
-                          =If(
-                              CountIf(colConsSel, amt > 0) = 0,
-                              Notify("Enter a quantity (Qty) for at least 1 item to consume!", NotificationType.Error),
-                              CountIf(colConsSel, amt > LookUp(dis_stocks, dis_stock = stockId).qty Or amt < 0) > 0,
-                              Notify("Qty exceeds available stock!", NotificationType.Error),
-                              UpdateContext({locConsConfirm: true})
-                          )
-                        RadiusBottomLeft: =8
-                        RadiusBottomRight: =8
-                        RadiusTopLeft: =8
-                        RadiusTopRight: =8
-                        Size: =14
-                        Text: ="Consume"
-                        Width: =150
+                        PaddingLeft: =18
+                        PaddingRight: =8
+                        RadiusBottomLeft: =16
+                        RadiusBottomRight: =16
+                        RadiusTopLeft: =16
+                        RadiusTopRight: =16
+                      Children:
+                        - txtConsCartSum:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(255, 255, 255, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =44
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =13
+                              Text: |-
+                                =With({n: CountIf(colConsSel, amt > 0), m: Sum(colConsSel, amt)}, Text(n) & If(n = 1, " item", " items") & "  ·  " & Text(m) & " pcs" & Char(10) & "Ready to consume")
+                              VerticalAlign: =VerticalAlign.Middle
+                        - btnConsCartClear:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Clear selected quantities"
+                              Appearance: =ButtonAppearance.Subtle
+                              Color: =RGBA(255, 255, 255, 0.85)
+                              Font: =Font.'Segoe UI'
+                              Height: =44
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: =Clear(colConsSel)
+                              Size: =13
+                              Text: ="Clear"
+                              Width: =70
+                        - btnConsCartGo:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Consume selected items"
+                              BasePaletteColor: =RGBA(255, 255, 255, 1)
+                              Color: =RGBA(0, 18, 107, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =44
+                              Icon: ="ArrowRight"
+                              Layout: =ButtonLayout.IconAfter
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =If(
+                                    CountIf(colConsSel, amt > 0) = 0,
+                                    Notify("Enter a quantity (Qty) for at least 1 item to consume!", NotificationType.Error),
+                                    CountIf(colConsSel, amt > LookUp(dis_stocks, dis_stock = stockId).qty Or amt < 0) > 0,
+                                    Notify("Qty exceeds available stock!", NotificationType.Error),
+                                    UpdateContext({locConsConfirm: true})
+                                )
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Size: =14
+                              Text: ="Consume"
+                              Width: =140
             - cmpConsTabBar:
                 Control: CanvasComponent
                 ComponentName: cmpTabBar
@@ -519,7 +640,7 @@ Screens:
                 Properties:
                   DropShadow: =DropShadow.None
                   Fill: =RGBA(255, 255, 255, 1)
-                  Height: =Min(Parent.Height * 0.8, 236 + 64 * CountIf(colConsSel, amt > 0))
+                  Height: =Min(Parent.Height * 0.8, 252 + 64 * CountIf(colConsSel, amt > 0))
                   LayoutAlignItems: =LayoutAlignItems.Stretch
                   LayoutDirection: =LayoutDirection.Vertical
                   LayoutGap: =12
@@ -528,12 +649,28 @@ Screens:
                   PaddingBottom: =20
                   PaddingLeft: =20
                   PaddingRight: =20
-                  PaddingTop: =20
+                  PaddingTop: =10
                   RadiusBottomLeft: =0
                   RadiusBottomRight: =0
-                  RadiusTopLeft: =16
-                  RadiusTopRight: =16
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
                 Children:
+                  - conConsHandle:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Center
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(209, 213, 219, 1)
+                        FillPortions: =0
+                        Height: =4
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =2
+                        RadiusBottomRight: =2
+                        RadiusTopLeft: =2
+                        RadiusTopRight: =2
+                        Width: =44
                   - txtConsDlgTitle:
                       Control: ModernText
                       Properties:
@@ -582,6 +719,23 @@ Screens:
                         TemplatePadding: =1
                         TemplateSize: =62
                       Children:
+                        - imgConsDlgItem:
+                            Control: Image
+                            Properties:
+                              AccessibleLabel: ="Item photo"
+                              Fill: =RGBA(244, 246, 250, 1)
+                              Height: =44
+                              HoverFill: =RGBA(244, 246, 250, 1)
+                              Image: =LookUp(dis_stocks, dis_stock = ThisItem.stockId).dis_item_v2.Image
+                              ImagePosition: =ImagePosition.Fit
+                              PressedFill: =RGBA(244, 246, 250, 1)
+                              RadiusBottomLeft: =8
+                              RadiusBottomRight: =8
+                              RadiusTopLeft: =8
+                              RadiusTopRight: =8
+                              Width: =44
+                              X: =8
+                              Y: =(Parent.TemplateHeight - Self.Height) / 2
                         - txtConsDlgItem:
                             Control: ModernText
                             Properties:
@@ -595,8 +749,8 @@ Screens:
                               Size: =13
                               Text: |-
                                 =With({st: LookUp(dis_stocks, dis_stock = ThisItem.stockId)}, st.dis_item_v2.name & Char(10) & st.dis_area.Name & "  ·  stock " & Text(st.qty))
-                              Width: =Parent.TemplateWidth - 108
-                              X: =12
+                              Width: =Parent.TemplateWidth - 156
+                              X: =62
                               Y: =(Parent.TemplateHeight - Self.Height) / 2
                         - txtConsDlgQty:
                             Control: ModernText
@@ -645,10 +799,10 @@ Screens:
                               LayoutMinWidth: =0
                               OnSelect: |-
                                 =UpdateContext({locConsConfirm: false})
-                              RadiusBottomLeft: =8
-                              RadiusBottomRight: =8
-                              RadiusTopLeft: =8
-                              RadiusTopRight: =8
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
                               Size: =14
                               Text: ="Cancel"
                         - btnConsDlgOk:
@@ -741,9 +895,9 @@ Screens:
                                     )
                                 );
                                 UpdateContext({locConsBusy: false})
-                              RadiusBottomLeft: =8
-                              RadiusBottomRight: =8
-                              RadiusTopLeft: =8
-                              RadiusTopRight: =8
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
                               Size: =14
                               Text: =If(locConsBusy, "Saving...", "Consume")
