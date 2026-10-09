@@ -1,6 +1,6 @@
 # Rencana App Mobile Teknisi
 
-Status: langkah 1-2 + History selesai (2026-10-09). Find DIBATALKAN (user: cukup lewat Consume). Ubah dokumen ini kalau user memutuskan lain.
+Status: Consume, History, Dashboard selesai (2026-10-09); tinggal uji di HP + publish. Find DIBATALKAN (user: cukup lewat Consume). Ubah dokumen ini kalau user memutuskan lain.
 
 ## Yang sudah ada
 - App.Formulas: nfMe, nfIsAdmin, nfMyBl, nfMyAreas, nfMyAreaIds, nfLowStock, `nfHasAccess` (terdaftar DAN punya BL),
@@ -16,6 +16,9 @@ Status: langkah 1-2 + History selesai (2026-10-09). Find DIBATALKAN (user: cukup
   default 30 hari), daftar kartu `galHist` (nomor, tanggal, badge tipe, rute asal -> tujuan, "By" pembuat). Query:
   Filter/Sort delegable di dalam (periode, tipe, nomor), filter area BL (`area_form`/`area_to in nfMyAreaIds`) di luar.
   Tap kartu -> lembar detail `conHistDlg` (`locHistSel`, `locHistOpen`) berisi item (foto, nama, BPN, qty bertanda).
+- `scr_m_dashboard` (prefix Dash): tanggal + refresh, 4 KPI (Stock items, Low stock qty>0, Out of stock, Consumed
+  today), section "Low stock" (`galDashLow` = nfLowStock area BL, qty/min) dan "Recent transactions" (5 terakhir
+  30 hari, See all -> History). Semua dihitung langsung dari data source (tanpa koleksi), dibatasi nfMyAreaIds.
 - `scr_m_consume` (gaya e-commerce): search pill + reset/refresh, chip kategori (`btnConsCatAll` + galeri horizontal
   `galConsCat`, state `locConsCat`), dropdown Area, grid 2 kolom `galCons` (latar kartu `conConsCard` ManualLayout tanpa
   anak, foto, badge stok di atas foto, nama, BPN, area, tombol Add -> stepper - / angka / +; badge = status stok, `txtConsLeft` = "Stock left n uom -> sisa setelah consume"). Pilihan qty di koleksi
@@ -51,10 +54,10 @@ StartScreen: `If(nfHasAccess, scr_m_consume, scr_m_noaccess)`.
 2. ~~`scr_m_consume`~~ (selesai)
 3. ~~`scr_m_find`~~ (batal)
 4. ~~`scr_m_history`~~ (selesai)
-5. `scr_m_dashboard`
+5. ~~`scr_m_dashboard`~~ (selesai)
 6. Uji di HP (aplikasi Power Apps mobile), publish.
 
 ## Pertanyaan terbuka (tanya user saat mulai)
 - ~~Konfirmasi sebelum Consume~~: dibuat (lembar konfirmasi); hapus kalau user tidak mau.
-- Dashboard untuk teknisi: KPI apa yang paling berguna?
+- ~~KPI dashboard~~: dipakai usulan (user setuju).
 - Perlu scan barcode (BarcodeReader) untuk mencari item? Bisa ditambah nanti.

@@ -39,27 +39,707 @@ Screens:
                   LayoutGap: =12
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
-                  PaddingBottom: =16
+                  PaddingBottom: =12
                   PaddingLeft: =16
                   PaddingRight: =16
-                  PaddingTop: =16
+                  PaddingTop: =12
                   RadiusBottomLeft: =0
                   RadiusBottomRight: =0
                   RadiusTopLeft: =0
                   RadiusTopRight: =0
                 Children:
-                  - txtDashSoon:
-                      Control: ModernText
+                  - conDashTop:
+                      Control: GroupContainer
+                      Variant: AutoLayout
                       Properties:
-                        Align: =Align.Center
-                        AlignInContainer: =AlignInContainer.Stretch
-                        Color: =RGBA(100, 112, 130, 1)
-                        Font: =Font.'Segoe UI'
-                        Height: =60
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =40
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
-                        Size: =14
-                        Text: ="Dashboard screen is under construction."
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - txtDashDate:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(31, 41, 55, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =24
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingBottom: =0
+                              PaddingLeft: =4
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =14
+                              Text: =Text(Today(), "dddd, dd mmmm yyyy", "en-US")
+                              Wrap: =false
+                        - btnDashRefresh:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Refresh dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              Color: =RGBA(0, 18, 107, 1)
+                              Height: =40
+                              Icon: ="ArrowSync"
+                              Layout: =ButtonLayout.IconOnly
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =Refresh(dis_stocks);
+                                Refresh(dis_trx_headers)
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Size: =18
+                              Text: ="Refresh dashboard"
+                              Width: =40
+                  - conDashKpi1:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =96
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - conDashStock:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =RGBA(255, 255, 255, 1)
+                              FillPortions: =1
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutJustifyContent: =LayoutJustifyContent.Center
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingLeft: =14
+                              PaddingRight: =14
+                              RadiusBottomLeft: =14
+                              RadiusBottomRight: =14
+                              RadiusTopLeft: =14
+                              RadiusTopRight: =14
+                            Children:
+                              - txtDashStockLbl:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =18
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: |-
+                                      ="Stock items"
+                                    Wrap: =false
+                              - txtDashStockVal:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(0, 18, 107, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =36
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =26
+                                    Text: |-
+                                      =Text(CountIf(dis_stocks, dis_area.dis_area in nfMyAreaIds))
+                                    Wrap: =false
+                              - txtDashStockSub:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Normal
+                                    Height: =16
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =11
+                                    Text: |-
+                                      ="in " & Text(CountIf(nfMyAreas, true)) & " area(s)"
+                                    Wrap: =false
+
+                        - conDashLow:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =RGBA(255, 255, 255, 1)
+                              FillPortions: =1
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutJustifyContent: =LayoutJustifyContent.Center
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingLeft: =14
+                              PaddingRight: =14
+                              RadiusBottomLeft: =14
+                              RadiusBottomRight: =14
+                              RadiusTopLeft: =14
+                              RadiusTopRight: =14
+                            Children:
+                              - txtDashLowLbl:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =18
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: |-
+                                      ="Low stock"
+                                    Wrap: =false
+                              - txtDashLowVal:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(188, 118, 0, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =36
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =26
+                                    Text: |-
+                                      =Text(CountIf(nfLowStock, dis_area.dis_area in nfMyAreaIds, qty > 0))
+                                    Wrap: =false
+                              - txtDashLowSub:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Normal
+                                    Height: =16
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =11
+                                    Text: |-
+                                      ="below min qty"
+                                    Wrap: =false
+                  - conDashKpi2:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =96
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - conDashOut:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =RGBA(255, 255, 255, 1)
+                              FillPortions: =1
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutJustifyContent: =LayoutJustifyContent.Center
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingLeft: =14
+                              PaddingRight: =14
+                              RadiusBottomLeft: =14
+                              RadiusBottomRight: =14
+                              RadiusTopLeft: =14
+                              RadiusTopRight: =14
+                            Children:
+                              - txtDashOutLbl:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =18
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: |-
+                                      ="Out of stock"
+                                    Wrap: =false
+                              - txtDashOutVal:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(196, 43, 28, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =36
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =26
+                                    Text: |-
+                                      =Text(CountIf(dis_stocks, dis_area.dis_area in nfMyAreaIds, qty <= 0))
+                                    Wrap: =false
+                              - txtDashOutSub:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Normal
+                                    Height: =16
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =11
+                                    Text: |-
+                                      ="needs restock"
+                                    Wrap: =false
+
+                        - conDashToday:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =RGBA(255, 255, 255, 1)
+                              FillPortions: =1
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutJustifyContent: =LayoutJustifyContent.Center
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingLeft: =14
+                              PaddingRight: =14
+                              RadiusBottomLeft: =14
+                              RadiusBottomRight: =14
+                              RadiusTopLeft: =14
+                              RadiusTopRight: =14
+                            Children:
+                              - txtDashTodayLbl:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =18
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: |-
+                                      ="Consumed today"
+                                    Wrap: =false
+                              - txtDashTodayVal:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(16, 124, 65, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =36
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =26
+                                    Text: |-
+                                      =Text(CountIf(Filter(dis_trx_headers, 'Created On' >= Today(), type = 'type (dis_trx_headers)'.Consume), area_form.dis_area in nfMyAreaIds))
+                                    Wrap: =false
+                              - txtDashTodaySub:
+                                  Control: ModernText
+                                  Properties:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Normal
+                                    Height: =16
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =11
+                                    Text: |-
+                                      =Text(Today(), "dd mmm yyyy")
+                                    Wrap: =false
+                  - conDashLowSec:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =RGBA(226, 230, 239, 1)
+                        BorderThickness: =1
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FillPortions: =1
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =6
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        PaddingBottom: =8
+                        PaddingLeft: =12
+                        PaddingRight: =12
+                        PaddingTop: =8
+                        RadiusBottomLeft: =14
+                        RadiusBottomRight: =14
+                        RadiusTopLeft: =14
+                        RadiusTopRight: =14
+                      Children:
+                        - conDashLowHead:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              DropShadow: =DropShadow.None
+                              FillPortions: =0
+                              Height: =40
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                            Children:
+                              - txtDashLowTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(31, 41, 55, 1)
+                                    FillPortions: =1
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =28
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =4
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =15
+                                    Text: |-
+                                      ="Low stock  (" & Text(galDashLow.AllItemsCount) & ")"
+                                    Wrap: =false
+
+                        - galDashLow:
+                            Control: Gallery
+                            Variant: Vertical
+                            Properties:
+                              AccessibleLabel: ="Low stock items"
+                              FillPortions: =1
+                              Items: =Sort(Filter(nfLowStock, dis_area.dis_area in nfMyAreaIds), qty, SortOrder.Ascending)
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              Selectable: =false
+                              ShowScrollbar: =false
+                              TemplateFill: =RGBA(255, 255, 255, 1)
+                              TemplatePadding: =0
+                              TemplateSize: =60
+                            Children:
+                              - imgDashLow:
+                                  Control: Image
+                                  Properties:
+                                    AccessibleLabel: ="Photo " & ThisItem.dis_item_v2.name
+                                    Fill: =RGBA(244, 246, 250, 1)
+                                    Height: =44
+                                    HoverFill: =RGBA(244, 246, 250, 1)
+                                    Image: =ThisItem.dis_item_v2.Image
+                                    ImagePosition: =ImagePosition.Fit
+                                    PressedFill: =RGBA(244, 246, 250, 1)
+                                    RadiusBottomLeft: =8
+                                    RadiusBottomRight: =8
+                                    RadiusTopLeft: =8
+                                    RadiusTopRight: =8
+                                    Width: =44
+                                    X: =4
+                                    Y: =8
+                              - txtDashLowItem:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(31, 41, 55, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =44
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: =ThisItem.dis_item_v2.name & Char(10) & ThisItem.dis_area.Name
+                                    Width: =Parent.TemplateWidth - 168
+                                    X: =58
+                                    Y: =8
+                              - txtDashLowQty:
+                                  Control: ModernText
+                                  Properties:
+                                    Align: =Align.Right
+                                    Color: =If(ThisItem.qty <= 0, RGBA(196, 43, 28, 1), RGBA(188, 118, 0, 1))
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =44
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =13
+                                    Text: |-
+                                      =Text(ThisItem.qty) & " / " & Text(ThisItem.MinQty) & Char(10) & Text(ThisItem.dis_item_v2.uom)
+                                    Width: =100
+                                    X: =Parent.TemplateWidth - 104
+                                    Y: =8
+                        - txtDashLowEmpty:
+                            Control: ModernText
+                            Properties:
+                              Align: =Align.Center
+                              AlignInContainer: =AlignInContainer.Stretch
+                              Color: =RGBA(16, 124, 65, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =40
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              Size: =13
+                              Text: ="All stock is above minimum."
+                              Visible: =IsEmpty(galDashLow.AllItems)
+                  - conDashRecSec:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =RGBA(226, 230, 239, 1)
+                        BorderThickness: =1
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FillPortions: =1
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =6
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        PaddingBottom: =8
+                        PaddingLeft: =12
+                        PaddingRight: =12
+                        PaddingTop: =8
+                        RadiusBottomLeft: =14
+                        RadiusBottomRight: =14
+                        RadiusTopLeft: =14
+                        RadiusTopRight: =14
+                      Children:
+                        - conDashRecHead:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              DropShadow: =DropShadow.None
+                              FillPortions: =0
+                              Height: =40
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                            Children:
+                              - txtDashRecTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(31, 41, 55, 1)
+                                    FillPortions: =1
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =28
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =4
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =15
+                                    Text: |-
+                                      ="Recent transactions"
+                                    Wrap: =false
+                              - btnDashSeeAll:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="See all transactions"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Color: =RGBA(0, 120, 212, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =36
+                                    Icon: ="ChevronRight"
+                                    Layout: =ButtonLayout.IconAfter
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: =Navigate(scr_m_history, ScreenTransition.None)
+                                    Size: =12
+                                    Text: ="See all"
+                                    Width: =96
+                        - galDashRecent:
+                            Control: Gallery
+                            Variant: Vertical
+                            Properties:
+                              AccessibleLabel: ="Recent transactions"
+                              FillPortions: =1
+                              Items: |-
+                                =FirstN(
+                                    Filter(
+                                        Sort(
+                                            Filter(dis_trx_headers, 'Created On' >= DateAdd(Today(), -29, TimeUnit.Days)),
+                                            'Created On',
+                                            SortOrder.Descending
+                                        ),
+                                        area_form.dis_area in nfMyAreaIds Or area_to.dis_area in nfMyAreaIds
+                                    ),
+                                    5
+                                )
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              Selectable: =false
+                              ShowScrollbar: =false
+                              TemplateFill: =RGBA(255, 255, 255, 1)
+                              TemplatePadding: =0
+                              TemplateSize: =56
+                            Children:
+                              - txtDashRecNo:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(31, 41, 55, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =22
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =13
+                                    Text: =ThisItem.transaction_number
+                                    Width: =Parent.TemplateWidth - 120
+                                    Wrap: =false
+                                    X: =4
+                                    Y: =6
+                              - txtDashRecMeta:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(100, 112, 130, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =20
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =11
+                                    Text: |-
+                                      =Text(ThisItem.'Created On', "dd mmm, hh:mm") & "  ·  " & If(ThisItem.type = 'type (dis_trx_headers)'.Receive, "Received", Coalesce(ThisItem.area_form.Name, "-")) & " → " & If(ThisItem.type = 'type (dis_trx_headers)'.Consume, "Consumed", Coalesce(ThisItem.area_to.Name, "-"))
+                                    Width: =Parent.TemplateWidth - 120
+                                    Wrap: =false
+                                    X: =4
+                                    Y: =30
+                              - bdgDashRecType:
+                                  Control: Badge
+                                  Properties:
+                                    AccessibleLabel: ="Type " & Text(ThisItem.type)
+                                    Appearance: ='BadgeCanvas.Appearance'.Tint
+                                    Content: =Text(ThisItem.type)
+                                    FontSize: =11
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =24
+                                    Shape: ='BadgeCanvas.Shape'.Circular
+                                    ThemeColor: =Switch(Text(ThisItem.type), "Receive", 'BadgeCanvas.ThemeColor'.Success, "Consume", 'BadgeCanvas.ThemeColor'.Warning, "Transfer", 'BadgeCanvas.ThemeColor'.Brand, 'BadgeCanvas.ThemeColor'.Subtle)
+                                    Width: =88
+                                    X: =Parent.TemplateWidth - 92
+                                    Y: =16
+                        - txtDashRecEmpty:
+                            Control: ModernText
+                            Properties:
+                              Align: =Align.Center
+                              AlignInContainer: =AlignInContainer.Stretch
+                              Color: =RGBA(100, 112, 130, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =40
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              Size: =13
+                              Text: ="No transactions in the last 30 days."
+                              Visible: =IsEmpty(galDashRecent.AllItems)
             - cmpDashTabBar:
                 Control: CanvasComponent
                 ComponentName: cmpTabBar
