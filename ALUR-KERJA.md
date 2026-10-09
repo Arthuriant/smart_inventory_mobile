@@ -23,3 +23,8 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
 - [2026-10-09] CLAUDE.md, docs/mobile-plan.md, ALUR-KERJA.md, app/ (sync awal) | Setup project mobile: app Phone
   kosong (Screen1) dengan 13 data source Dataverse sudah ditambahkan user; konteks dari project desktop disalin ke
   CLAUDE.md. | status: belum compile | cek manual: -
+- [2026-10-09] App.pa.yaml, Components/cmpHeader + cmpTabBar, scr_m_noaccess, scr_m_consume/find/history/dashboard
+  (kerangka) | Langkah 1: App.Formulas RBAC + nfHasAccess + palet, StartScreen; komponen header & bottom tab bar;
+  screen noaccess (pesan, daftar admin + email, Check again); 4 screen tab berisi header/body placeholder/tab bar supaya
+  Navigate bisa dicompile. | status: compile OK (sync ulang: hanya beda properti default) | cek manual: Save di Studio,
+  hapus Screen1, cek tab bar (warna aktif, ikon), uji Check again.

@@ -1,3 +1,28 @@
 App:
   Properties:
+    BackEnabled: =false
+    Formulas: |-
+      =nfMe = LookUp(dis_users, email = User().Email);
+      nfIsAdmin = nfMe.role = dis_role.administrator;
+      // Area access follows the user's Sub Business Line: every area of that business line (none when the user has no business line)
+      nfMyBl = nfMe.'Sub Business Line';
+      nfMyAreas = Filter(dis_areas, elv_dis_subblid.dis_subbl = Coalesce(nfMyBl.dis_subbl, GUID("00000000-0000-0000-0000-000000000000")));
+      nfMyAreaIds = ForAll(nfMyAreas, ThisRecord.dis_area);
+      nfLowStock = Filter(AddColumns(dis_stocks, MinQty, dis_item_v2.min_qty), qty < MinQty);
+      // Registered in dis_users AND has a Sub Business Line (otherwise scr_m_noaccess)
+      nfHasAccess = !IsBlank(nfMe.Name) And !IsBlank(nfMyBl);
+      clrNavy = RGBA(0, 18, 107, 1);
+      clrAccent = RGBA(56, 96, 178, 1);
+      clrBg = RGBA(244, 246, 250, 1);
+      clrSurface = RGBA(255, 255, 255, 1);
+      clrBorder = RGBA(226, 230, 239, 1);
+      clrText = RGBA(31, 41, 55, 1);
+      clrTextMuted = RGBA(100, 112, 130, 1);
+      clrDanger = RGBA(196, 43, 28, 1);
+      clrDangerTint = RGBA(253, 237, 236, 1);
+      clrSuccess = RGBA(16, 124, 65, 1);
+      clrSuccessTint = RGBA(232, 246, 238, 1);
+      clrWarning = RGBA(188, 118, 0, 1);
+      clrWarningTint = RGBA(255, 246, 225, 1);
+    StartScreen: =If(nfHasAccess, scr_m_consume, scr_m_noaccess)
     Theme: =PowerAppsTheme

@@ -1,0 +1,69 @@
+ComponentDefinitions:
+  cmpHeader:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      Title:
+        PropertyKind: Input
+        DisplayName: Title
+        Description: Screen title shown in the header
+        DataType: Text
+        Default: =""
+    Properties:
+      Height: =88
+      Width: =640
+    Children:
+      - conHdRoot:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(0, 18, 107, 1)
+            Height: =cmpHeader.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =2
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            PaddingBottom: =12
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =12
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =cmpHeader.Width
+          Children:
+            - txtHdTitle:
+                Control: ModernText
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  Color: =RGBA(255, 255, 255, 1)
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =FontWeight.Bold
+                  Height: =32
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =20
+                  Text: =cmpHeader.Title
+                  Wrap: =false
+            - txtHdUser:
+                Control: ModernText
+                Properties:
+                  AlignInContainer: =AlignInContainer.Stretch
+                  Color: =RGBA(255, 255, 255, 0.8)
+                  Font: =Font.'Segoe UI'
+                  Height: =22
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =12
+                  Text: =Coalesce(nfMe.Name, User().FullName) & "  ·  " & Coalesce(nfMyBl.Name, "No business line")
+                  Wrap: =false
