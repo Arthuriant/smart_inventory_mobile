@@ -33,3 +33,8 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   item; simpan = logika kontrak desktop. Compile pertama gagal (YamlInvalidSyntax: UpdateContext({x: y}) satu baris,
   aturan #8) -> pakai |-. | status: compile OK; App Checker: 1 peringatan ForAllWithMutation (pola kontrak, dibiarkan)
   | cek manual: Save; uji stepper +/-, ketik qty, qty > stok, filter lalu Consume, cek header per area & stok berkurang.
+- [2026-10-09] scr_m_consume.pa.yaml (compile ulang), app/Screen1 dihapus | User melihat semua screen "under
+  construction": sesi Studio putus (401) sebelum Consume langkah 2 di-Save, jadi Studio memuat versi tersimpan langkah
+  1. Find/History/Dashboard memang masih kerangka (langkah 3-5). Connect ulang, kirim ulang scr_m_consume. Screen1
+  sudah dihapus user di Studio -> dihapus juga dari app/. | status: compile OK, sync ulang berisi Consume lengkap |
+  cek manual: File > Save SEGERA setelah Studio tampil, jangan refresh sebelumnya.

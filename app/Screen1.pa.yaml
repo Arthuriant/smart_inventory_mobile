@@ -1,4 +1,0 @@
-Screens:
-  Screen1:
-    Properties:
-      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
