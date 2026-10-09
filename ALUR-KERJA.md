@@ -44,3 +44,8 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   handle + thumbnail. Logika simpan tidak berubah. Masalah: compile pertama menaruh kontrol baru di akhir parent (chip di
   bawah daftar, latar kartu menimpa isi) -> compile kedua file yang sama memperbaiki urutan. | status: compile OK, urutan
   terverifikasi lewat sync | cek manual: Save; cek chip aktif, kartu (foto terlihat), Add -> stepper, bar keranjang.
+- [2026-10-09] scr_m_consume, scr_m_noaccess, Components/cmpTabBar, CLAUDE.md (aturan #12) | User: layout Consume
+  rusak (SS1.png: baris chip/Area melar, galeri kartu kecil, bar keranjang jadi blok navy besar, indikator tab tebal).
+  Sebab: GroupContainer di AutoLayout default FillPortions 1, jadi container bertinggi tetap ikut membagi ruang. Fix:
+  FillPortions =0 pada conConsSearchRow/ChipRow/DdRow/Cart/Sheet/DlgBtns, conNaBrand, conTb*Ind. | status: compile
+  OK, terverifikasi lewat sync | cek manual: Save, screenshot ulang Consume.

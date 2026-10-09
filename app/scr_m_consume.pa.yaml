@@ -54,6 +54,7 @@ Screens:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        FillPortions: =0
                         DropShadow: =DropShadow.None
                         Height: =44
                         LayoutAlignItems: =LayoutAlignItems.Center
@@ -132,6 +133,7 @@ Screens:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        FillPortions: =0
                         DropShadow: =DropShadow.None
                         Height: =36
                         LayoutAlignItems: =LayoutAlignItems.Center
@@ -202,6 +204,7 @@ Screens:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        FillPortions: =0
                         DropShadow: =DropShadow.None
                         Height: =40
                         LayoutAlignItems: =LayoutAlignItems.Stretch
@@ -513,6 +516,7 @@ Screens:
                 Control: GroupContainer
                 Variant: AutoLayout
                 Properties:
+                  FillPortions: =0
                   DropShadow: =DropShadow.None
                   Height: =80
                   LayoutAlignItems: =LayoutAlignItems.Stretch
@@ -638,6 +642,7 @@ Screens:
                 Control: GroupContainer
                 Variant: AutoLayout
                 Properties:
+                  FillPortions: =0
                   DropShadow: =DropShadow.None
                   Fill: =RGBA(255, 255, 255, 1)
                   Height: =Min(Parent.Height * 0.8, 252 + 64 * CountIf(colConsSel, amt > 0))
@@ -774,6 +779,7 @@ Screens:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        FillPortions: =0
                         DropShadow: =DropShadow.None
                         Height: =48
                         LayoutAlignItems: =LayoutAlignItems.Stretch

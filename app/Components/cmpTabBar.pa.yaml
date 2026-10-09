@@ -54,6 +54,7 @@ ComponentDefinitions:
                       Properties:
                         DropShadow: =DropShadow.None
                         Fill: =If(cmpTabBar.ActiveTab = "Consume", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        FillPortions: =0
                         Height: =3
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
@@ -105,6 +106,7 @@ ComponentDefinitions:
                       Properties:
                         DropShadow: =DropShadow.None
                         Fill: =If(cmpTabBar.ActiveTab = "Find", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        FillPortions: =0
                         Height: =3
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
@@ -156,6 +158,7 @@ ComponentDefinitions:
                       Properties:
                         DropShadow: =DropShadow.None
                         Fill: =If(cmpTabBar.ActiveTab = "History", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        FillPortions: =0
                         Height: =3
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
@@ -207,6 +210,7 @@ ComponentDefinitions:
                       Properties:
                         DropShadow: =DropShadow.None
                         Fill: =If(cmpTabBar.ActiveTab = "Dashboard", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        FillPortions: =0
                         Height: =3
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0

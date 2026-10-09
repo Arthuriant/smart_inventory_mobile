@@ -23,6 +23,7 @@ Screens:
                 Control: GroupContainer
                 Variant: AutoLayout
                 Properties:
+                  FillPortions: =0
                   DropShadow: =DropShadow.None
                   Fill: =RGBA(0, 18, 107, 1)
                   Height: =128

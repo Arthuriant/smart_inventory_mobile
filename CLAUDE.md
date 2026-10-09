@@ -92,6 +92,9 @@ Area tidak wajib dipilih untuk Consume (filter area hanya untuk menyaring tampil
 11. **Urutan kontrol baru**: compile pertama menaruh kontrol BARU di akhir parent-nya (urutan YAML diabaikan; di galeri
     ManualLayout ini juga z-order, mis. latar kartu menimpa isi). Setelah compile yang menambah kontrol, sync dan cek
     urutan; kalau salah, compile file yang sama sekali lagi (kontrol yang sudah ada mengikuti urutan YAML).
+12. **GroupContainer FillPortions default = 1** (Gallery juga). Container/galeri bertinggi tetap di dalam AutoLayout
+    WAJIB `FillPortions: =0`, kalau tidak ia ikut membagi sisa ruang (baris filter melar, galeri utama mengecil, bar
+    bawah jadi blok besar). Kontrol lain (ModernButton/Text/Input) default 0.
 
 ## Sync & compile (WAJIB)
 - `sync_canvas` dulu sebelum mengedit, ke folder sementara baru di scratchpad (bukan `app/`), lalu bandingkan dengan
