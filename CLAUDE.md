@@ -82,6 +82,8 @@ Area tidak wajib dipilih untuk Consume (filter area hanya untuk menyaring tampil
 6. **Filter Dataverse**: sisi kanan perbandingan harus konstanta. JANGAN tulis `nfIsAdmin Or x in nfMyAreaIds` di
    Filter (hasilnya kosong saat runtime); pakai `If(nfIsAdmin, true, x in nfMyAreaIds)`. `If(cond, Choices(..),
    Filter(Choices(..)))` merusak tipe record (display name hilang); pakai `Filter(Choices(..), If(...))`.
+   Kebalikannya untuk delegasi: `If(var, true, kolom = x)` DI DALAM Filter memicu delegation warning (compile dianggap
+   gagal); untuk tabel yang bisa besar (dis_trx_headers) taruh If di luar: `If(var, Filter(ds, a), Filter(ds, a, b))`.
 7. ModernText tidak punya `Tooltip`. Navigate di `OnVisible` ditolak compiler.
 8. Formula satu baris yang mengandung `": "` (mis. `{Qty: x}`) harus diberi tanda kutip atau `|-`, kalau tidak
    YamlInvalidSyntax.

@@ -64,3 +64,8 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   stock, Out of stock, Consumed today), daftar stok menipis (foto, qty/min) dan 5 transaksi terakhir (See all ->
   History); semua dibatasi area BL user, tanpa koleksi. | status: compile OK, urutan terverifikasi, App Checker tidak ada
   isu baru | cek manual: Save; cocokkan angka KPI dengan data, uji See all.
+- [2026-10-09] App.pa.yaml (nfMySysUserId), scr_m_dashboard.pa.yaml, CLAUDE.md | Dashboard diubah jadi HANYA transaksi
+  (user: untuk teknisi stok tidak perlu): chip My transactions / All in my BL, KPI Today/7/30 hari + Consume/Receive/
+  Transfer 30 hari, 10 transaksi terakhir. Compile pertama "gagal" karena 7 delegation warning dari If(locDashAll, true,
+  ...) di dalam Filter -> If dipindah ke luar Filter. | status: compile OK, urutan terverifikasi | cek manual: Save;
+  bandingkan "My transactions" dengan transaksi yang kamu buat sendiri.

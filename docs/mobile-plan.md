@@ -16,9 +16,10 @@ Status: Consume, History, Dashboard selesai (2026-10-09); tinggal uji di HP + pu
   default 30 hari), daftar kartu `galHist` (nomor, tanggal, badge tipe, rute asal -> tujuan, "By" pembuat). Query:
   Filter/Sort delegable di dalam (periode, tipe, nomor), filter area BL (`area_form`/`area_to in nfMyAreaIds`) di luar.
   Tap kartu -> lembar detail `conHistDlg` (`locHistSel`, `locHistOpen`) berisi item (foto, nama, BPN, qty bertanda).
-- `scr_m_dashboard` (prefix Dash): tanggal + refresh, 4 KPI (Stock items, Low stock qty>0, Out of stock, Consumed
-  today), section "Low stock" (`galDashLow` = nfLowStock area BL, qty/min) dan "Recent transactions" (5 terakhir
-  30 hari, See all -> History). Semua dihitung langsung dari data source (tanpa koleksi), dibatasi nfMyAreaIds.
+- `scr_m_dashboard` (prefix Dash) - HANYA transaksi (user: teknisi tidak perlu stok): tanggal + refresh, chip
+  "My transactions" (default, 'Created By' = `nfMySysUserId`) / "All in my BL" (`locDashAll`), KPI Today / 7 / 30 hari
+  dan Consume / Receive / Transfer (30 hari), daftar 10 transaksi terakhir (See all -> History). Query: If(locDashAll,
+  Filter(..), Filter(.., 'Created By'.User = ..)) di server (If DI LUAR Filter agar delegable), area BL di lokal.
 - `scr_m_consume` (gaya e-commerce): search pill + reset/refresh, chip kategori (`btnConsCatAll` + galeri horizontal
   `galConsCat`, state `locConsCat`), dropdown Area, grid 2 kolom `galCons` (latar kartu `conConsCard` ManualLayout tanpa
   anak, foto, badge stok di atas foto, nama, BPN, area, tombol Add -> stepper - / angka / +; badge = status stok, `txtConsLeft` = "Stock left n uom -> sisa setelah consume"). Pilihan qty di koleksi

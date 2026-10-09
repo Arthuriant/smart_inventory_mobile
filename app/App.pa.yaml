@@ -8,6 +8,8 @@ App:
       nfMyBl = nfMe.'Sub Business Line';
       nfMyAreas = Filter(dis_areas, elv_dis_subblid.dis_subbl = Coalesce(nfMyBl.dis_subbl, GUID("00000000-0000-0000-0000-000000000000")));
       nfMyAreaIds = ForAll(nfMyAreas, ThisRecord.dis_area);
+      // systemuser id of the signed-in user (matches 'Created By' on transactions)
+      nfMySysUserId = LookUp(Users, 'Primary Email' = User().Email).User;
       nfLowStock = Filter(AddColumns(dis_stocks, MinQty, dis_item_v2.min_qty), qty < MinQty);
       // Registered in dis_users AND has a Sub Business Line (otherwise scr_m_noaccess)
       nfHasAccess = !IsBlank(nfMe.Name) And !IsBlank(nfMyBl);
