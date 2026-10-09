@@ -9,6 +9,7 @@ jawab dalam bahasa Indonesia. Teks UI di app tetap bahasa Inggris (sama dengan d
 - Login MCP `connect`: `login_hint` = `ARianto2@slb.com`
 - URL Studio (mode edit):
   https://make.powerapps.com/e/c2194d0b-89b3-ed3b-b65a-1db58a779659/canvas?action=edit&form-factor=phone&app-id=%2Fproviders%2FMicrosoft.PowerApps%2Fapps%2Ffade1324-de08-4ffb-88a8-46aebc0dad43
+- Repo: https://github.com/Arthuriant/smart_inventory_mobile (branch main, private)
 - Folder ini: `app/` = HANYA file `.pa.yaml` (hasil sync/compile). Dokumen di root dan `docs/`.
 - Rencana layar: `docs/mobile-plan.md`. Alur kerja harian + Log: `ALUR-KERJA.md`.
 
