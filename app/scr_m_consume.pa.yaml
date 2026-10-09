@@ -588,8 +588,8 @@ Screens:
                             Control: ModernButton
                             Properties:
                               AccessibleLabel: ="Consume selected items"
-                              BasePaletteColor: =RGBA(255, 255, 255, 1)
-                              Color: =RGBA(0, 18, 107, 1)
+                              BasePaletteColor: =RGBA(0, 120, 212, 1)
+                              Color: =RGBA(255, 255, 255, 1)
                               Font: =Font.'Segoe UI'
                               FontWeight: =FontWeight.Bold
                               Height: =44

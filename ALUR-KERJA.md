@@ -49,3 +49,6 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   Sebab: GroupContainer di AutoLayout default FillPortions 1, jadi container bertinggi tetap ikut membagi ruang. Fix:
   FillPortions =0 pada conConsSearchRow/ChipRow/DdRow/Cart/Sheet/DlgBtns, conNaBrand, conTb*Ind. | status: compile
   OK, terverifikasi lewat sync | cek manual: Save, screenshot ulang Consume.
+- [2026-10-09] scr_m_consume.pa.yaml | Tombol Consume di bar keranjang (btnConsCartGo) terlihat gelap: BasePaletteColor
+  putih dirender abu-abu. Ganti ke biru terang RGBA(0, 120, 212, 1) + teks putih. | status: compile OK | cek manual:
+  Save, cek kontras tombol di bar navy.
