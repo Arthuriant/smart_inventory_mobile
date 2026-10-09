@@ -69,3 +69,7 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   Transfer 30 hari, 10 transaksi terakhir. Compile pertama "gagal" karena 7 delegation warning dari If(locDashAll, true,
   ...) di dalam Filter -> If dipindah ke luar Filter. | status: compile OK, urutan terverifikasi | cek manual: Save;
   bandingkan "My transactions" dengan transaksi yang kamu buat sendiri.
+- [2026-10-09] Components/cmpTabBar.pa.yaml | Tab bar dimodernkan: bar putih sudut atas bulat + DropShadow.Semilight
+  (tanpa border), ikon di atas label, tab aktif = ikon filled di atas pill biru muda (conTb*Ind dipakai ulang jadi pill,
+  ikon baru btnTb*Ico) + label navy bold. Studio membuang AlignInContainer Stretch di label -> tambah Width =Parent.Width.
+  | status: compile OK, urutan terverifikasi | cek manual: Save; cek ketiga tab di HP.

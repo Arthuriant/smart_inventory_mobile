@@ -6,7 +6,8 @@ Status: Consume, History, Dashboard selesai (2026-10-09); tinggal uji di HP + pu
 - App.Formulas: nfMe, nfIsAdmin, nfMyBl, nfMyAreas, nfMyAreaIds, nfLowStock, `nfHasAccess` (terdaftar DAN punya BL),
   palet clr*. StartScreen `=If(nfHasAccess, scr_m_consume, scr_m_noaccess)`.
 - Komponen `cmpHeader` (input `Title`; baris kedua = nama user · BL) dan `cmpTabBar` (input `ActiveTab`: "Consume" /
-  "History" / "Dashboard"; 3 ModernButton, Navigate ke screen tab).
+  "History" / "Dashboard"). Gaya modern: bar putih sudut atas bulat + bayangan; per tab ikon di atas pill
+  (`conTb<k>Ind`, biru muda saat aktif, tombol `btnTb<k>Ico`) dan label (`btnTb<k>`); keduanya Navigate.
 - Tiap screen tab: `con<P>Root` (AutoLayout vertikal) -> `cmp<P>Header` (88) - `con<P>Body` (FillPortions 1, isi
   screen ditaruh DI SINI) - `cmp<P>TabBar` (72). Prefix: Cons, Hist, Dash. Body masih berisi teks placeholder
   `txt<P>Soon` (hapus saat screen dibangun).

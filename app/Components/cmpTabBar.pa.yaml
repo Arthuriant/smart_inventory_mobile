@@ -17,20 +17,19 @@ ComponentDefinitions:
           Control: GroupContainer
           Variant: AutoLayout
           Properties:
-            BorderColor: =RGBA(226, 230, 239, 1)
-            BorderThickness: =1
-            DropShadow: =DropShadow.None
+            DropShadow: =DropShadow.Semilight
             Fill: =RGBA(255, 255, 255, 1)
             Height: =cmpTabBar.Height
             LayoutAlignItems: =LayoutAlignItems.Stretch
             LayoutDirection: =LayoutDirection.Horizontal
-            PaddingBottom: =4
-            PaddingLeft: =4
-            PaddingRight: =4
+            PaddingBottom: =6
+            PaddingLeft: =12
+            PaddingRight: =12
+            PaddingTop: =8
             RadiusBottomLeft: =0
             RadiusBottomRight: =0
-            RadiusTopLeft: =0
-            RadiusTopRight: =0
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
             Width: =cmpTabBar.Width
           Children:
             - conTbCons:
@@ -39,8 +38,10 @@ ComponentDefinitions:
                 Properties:
                   DropShadow: =DropShadow.None
                   FillPortions: =1
-                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutAlignItems: =LayoutAlignItems.Center
                   LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
                   RadiusBottomLeft: =0
@@ -52,47 +53,80 @@ ComponentDefinitions:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        AlignInContainer: =AlignInContainer.Center
                         DropShadow: =DropShadow.None
-                        Fill: =If(cmpTabBar.ActiveTab = "Consume", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        Fill: =If(cmpTabBar.ActiveTab = "Consume", RGBA(226, 234, 252, 1), RGBA(0, 0, 0, 0))
                         FillPortions: =0
-                        Height: =3
+                        Height: =32
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
-                        RadiusBottomLeft: =2
-                        RadiusBottomRight: =2
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
+                        RadiusBottomLeft: =16
+                        RadiusBottomRight: =16
+                        RadiusTopLeft: =16
+                        RadiusTopRight: =16
+                        Width: =64
+                      Children:
+                        - btnTbConsIco:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open Consume"
+                              Appearance: =ButtonAppearance.Transparent
+                              Color: =If(cmpTabBar.ActiveTab = "Consume", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
+                              FillPortions: =1
+                              Height: =32
+                              Icon: ="Wrench"
+                              IconStyle: =If(cmpTabBar.ActiveTab = "Consume", IconStyle.Filled, IconStyle.Outline)
+                              Layout: =ButtonLayout.IconOnly
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: =If(cmpTabBar.ActiveTab <> "Consume", Navigate(scr_m_consume, ScreenTransition.None))
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =16
+                              RadiusBottomRight: =16
+                              RadiusTopLeft: =16
+                              RadiusTopRight: =16
+                              Size: =20
+                              Text: ="Consume"
                   - btnTbCons:
                       Control: ModernButton
                       Properties:
                         AccessibleLabel: ="Open Consume"
                         AlignInContainer: =AlignInContainer.Stretch
-                        Appearance: =ButtonAppearance.Subtle
+                        Appearance: =ButtonAppearance.Transparent
                         Color: =If(cmpTabBar.ActiveTab = "Consume", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
-                        FillPortions: =1
                         Font: =Font.'Segoe UI'
                         FontWeight: =If(cmpTabBar.ActiveTab = "Consume", FontWeight.Bold, FontWeight.Normal)
-                        Icon: ="Wrench"
-                        IconStyle: =If(cmpTabBar.ActiveTab = "Consume", IconStyle.Filled, IconStyle.Outline)
-                        LayoutMinHeight: =44
+                        Height: =22
+                        Layout: =ButtonLayout.TextOnly
+                        LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         OnSelect: =If(cmpTabBar.ActiveTab <> "Consume", Navigate(scr_m_consume, ScreenTransition.None))
-                        PaddingLeft: =2
-                        PaddingRight: =2
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
                         RadiusTopRight: =0
-                        Size: =12
+                        Size: =11
                         Text: ="Consume"
+                        Width: =Parent.Width
             - conTbHist:
                 Control: GroupContainer
                 Variant: AutoLayout
                 Properties:
                   DropShadow: =DropShadow.None
                   FillPortions: =1
-                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutAlignItems: =LayoutAlignItems.Center
                   LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
                   RadiusBottomLeft: =0
@@ -104,47 +138,80 @@ ComponentDefinitions:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        AlignInContainer: =AlignInContainer.Center
                         DropShadow: =DropShadow.None
-                        Fill: =If(cmpTabBar.ActiveTab = "History", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        Fill: =If(cmpTabBar.ActiveTab = "History", RGBA(226, 234, 252, 1), RGBA(0, 0, 0, 0))
                         FillPortions: =0
-                        Height: =3
+                        Height: =32
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
-                        RadiusBottomLeft: =2
-                        RadiusBottomRight: =2
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
+                        RadiusBottomLeft: =16
+                        RadiusBottomRight: =16
+                        RadiusTopLeft: =16
+                        RadiusTopRight: =16
+                        Width: =64
+                      Children:
+                        - btnTbHistIco:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open History"
+                              Appearance: =ButtonAppearance.Transparent
+                              Color: =If(cmpTabBar.ActiveTab = "History", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
+                              FillPortions: =1
+                              Height: =32
+                              Icon: ="History"
+                              IconStyle: =If(cmpTabBar.ActiveTab = "History", IconStyle.Filled, IconStyle.Outline)
+                              Layout: =ButtonLayout.IconOnly
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: =If(cmpTabBar.ActiveTab <> "History", Navigate(scr_m_history, ScreenTransition.None))
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =16
+                              RadiusBottomRight: =16
+                              RadiusTopLeft: =16
+                              RadiusTopRight: =16
+                              Size: =20
+                              Text: ="History"
                   - btnTbHist:
                       Control: ModernButton
                       Properties:
                         AccessibleLabel: ="Open History"
                         AlignInContainer: =AlignInContainer.Stretch
-                        Appearance: =ButtonAppearance.Subtle
+                        Appearance: =ButtonAppearance.Transparent
                         Color: =If(cmpTabBar.ActiveTab = "History", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
-                        FillPortions: =1
                         Font: =Font.'Segoe UI'
                         FontWeight: =If(cmpTabBar.ActiveTab = "History", FontWeight.Bold, FontWeight.Normal)
-                        Icon: ="History"
-                        IconStyle: =If(cmpTabBar.ActiveTab = "History", IconStyle.Filled, IconStyle.Outline)
-                        LayoutMinHeight: =44
+                        Height: =22
+                        Layout: =ButtonLayout.TextOnly
+                        LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         OnSelect: =If(cmpTabBar.ActiveTab <> "History", Navigate(scr_m_history, ScreenTransition.None))
-                        PaddingLeft: =2
-                        PaddingRight: =2
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
                         RadiusTopRight: =0
-                        Size: =12
+                        Size: =11
                         Text: ="History"
+                        Width: =Parent.Width
             - conTbDash:
                 Control: GroupContainer
                 Variant: AutoLayout
                 Properties:
                   DropShadow: =DropShadow.None
                   FillPortions: =1
-                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutAlignItems: =LayoutAlignItems.Center
                   LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =2
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
                   RadiusBottomLeft: =0
@@ -156,36 +223,67 @@ ComponentDefinitions:
                       Control: GroupContainer
                       Variant: AutoLayout
                       Properties:
+                        AlignInContainer: =AlignInContainer.Center
                         DropShadow: =DropShadow.None
-                        Fill: =If(cmpTabBar.ActiveTab = "Dashboard", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
+                        Fill: =If(cmpTabBar.ActiveTab = "Dashboard", RGBA(226, 234, 252, 1), RGBA(0, 0, 0, 0))
                         FillPortions: =0
-                        Height: =3
+                        Height: =32
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
-                        RadiusBottomLeft: =2
-                        RadiusBottomRight: =2
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
+                        RadiusBottomLeft: =16
+                        RadiusBottomRight: =16
+                        RadiusTopLeft: =16
+                        RadiusTopRight: =16
+                        Width: =64
+                      Children:
+                        - btnTbDashIco:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open Dashboard"
+                              Appearance: =ButtonAppearance.Transparent
+                              Color: =If(cmpTabBar.ActiveTab = "Dashboard", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
+                              FillPortions: =1
+                              Height: =32
+                              Icon: ="Home"
+                              IconStyle: =If(cmpTabBar.ActiveTab = "Dashboard", IconStyle.Filled, IconStyle.Outline)
+                              Layout: =ButtonLayout.IconOnly
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: =If(cmpTabBar.ActiveTab <> "Dashboard", Navigate(scr_m_dashboard, ScreenTransition.None))
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =16
+                              RadiusBottomRight: =16
+                              RadiusTopLeft: =16
+                              RadiusTopRight: =16
+                              Size: =20
+                              Text: ="Dashboard"
                   - btnTbDash:
                       Control: ModernButton
                       Properties:
                         AccessibleLabel: ="Open Dashboard"
                         AlignInContainer: =AlignInContainer.Stretch
-                        Appearance: =ButtonAppearance.Subtle
+                        Appearance: =ButtonAppearance.Transparent
                         Color: =If(cmpTabBar.ActiveTab = "Dashboard", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
-                        FillPortions: =1
                         Font: =Font.'Segoe UI'
                         FontWeight: =If(cmpTabBar.ActiveTab = "Dashboard", FontWeight.Bold, FontWeight.Normal)
-                        Icon: ="Home"
-                        IconStyle: =If(cmpTabBar.ActiveTab = "Dashboard", IconStyle.Filled, IconStyle.Outline)
-                        LayoutMinHeight: =44
+                        Height: =22
+                        Layout: =ButtonLayout.TextOnly
+                        LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         OnSelect: =If(cmpTabBar.ActiveTab <> "Dashboard", Navigate(scr_m_dashboard, ScreenTransition.None))
-                        PaddingLeft: =2
-                        PaddingRight: =2
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
                         RadiusTopRight: =0
-                        Size: =12
+                        Size: =11
                         Text: ="Dashboard"
+                        Width: =Parent.Width
