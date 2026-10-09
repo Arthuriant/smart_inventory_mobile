@@ -73,3 +73,7 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   (tanpa border), ikon di atas label, tab aktif = ikon filled di atas pill biru muda (conTb*Ind dipakai ulang jadi pill,
   ikon baru btnTb*Ico) + label navy bold. Studio membuang AlignInContainer Stretch di label -> tambah Width =Parent.Width.
   | status: compile OK, urutan terverifikasi | cek manual: Save; cek ketiga tab di HP.
+- [2026-10-09] (compile ulang) App, scr_m_dashboard, Components/cmpTabBar | User: update navbar & dashboard tidak
+  terlihat di Studio. Sync sesi menunjukkan perubahan sudah ada di server; connect ulang + compile ulang ketiga file.
+  Kemungkinan Studio tidak me-render ulang (atau tab Studio dibuka ulang). | status: compile OK | cek manual: kalau
+  masih tampilan lama, File > Save lalu tutup/buka ulang app di Studio (versi tersimpan sudah memuat perubahan).
