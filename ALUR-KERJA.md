@@ -77,3 +77,8 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   terlihat di Studio. Sync sesi menunjukkan perubahan sudah ada di server; connect ulang + compile ulang ketiga file.
   Kemungkinan Studio tidak me-render ulang (atau tab Studio dibuka ulang). | status: compile OK | cek manual: kalau
   masih tampilan lama, File > Save lalu tutup/buka ulang app di Studio (versi tersimpan sudah memuat perubahan).
+- [2026-10-09] App, scr_m_dashboard, Components/cmpTabBar (compile satu per satu) | Versi tersimpan di Studio ternyata
+  masih Dashboard kerangka + tab bar lama + App tanpa nfMySysUserId (Studio dibuka ulang sebelum Save). Kirim ulang
+  bertahap: (1) App + Dashboard -> user cek & Save, (2) tab bar. Pelajaran: tiap kali user membuka ulang Studio,
+  connect ulang + sync dan bandingkan struktur SEMUA file dengan app/ sebelum menganggap perubahan sudah tersimpan. |
+  status: compile OK keduanya, sync terverifikasi | cek manual: Save setelah tab bar tampil.
