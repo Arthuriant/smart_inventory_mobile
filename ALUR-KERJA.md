@@ -52,3 +52,11 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
 - [2026-10-09] scr_m_consume.pa.yaml | Tombol Consume di bar keranjang (btnConsCartGo) terlihat gelap: BasePaletteColor
   putih dirender abu-abu. Ganti ke biru terang RGBA(0, 120, 212, 1) + teks putih. | status: compile OK | cek manual:
   Save, cek kontras tombol di bar navy.
+- [2026-10-09] scr_m_consume, Components/cmpTabBar, scr_m_find (dihapus), scr_m_history | (1) Kartu Consume: badge =
+  status (In stock/Low stock/Out of stock), teks baru txtConsLeft "Stock left n uom -> sisa setelah consume", kartu 316.
+  (2) Find dibatalkan user: tab Find dihapus (tab bar 3 tab), screen dihapus (hapus file dari folder compile + baris
+  _EditorState = screen terhapus di Studio). (3) History mobile: search nomor, chip tipe & periode (default 30 hari),
+  kartu transaksi, lembar detail item; dibatasi area BL user (desktop tidak memfilter area). App Checker: pakai
+  AllItemsCount untuk teks jumlah (Visible galeri tetap IsEmpty(AllItems)). | status: compile OK (2x untuk urutan
+  txtConsLeft), sync terverifikasi | cek manual: Save; History: chip, buka detail, nama "By", transaksi area lain tidak
+  tampil.

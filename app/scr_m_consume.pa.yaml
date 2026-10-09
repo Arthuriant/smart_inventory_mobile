@@ -295,7 +295,7 @@ Screens:
                         ShowScrollbar: =false
                         TemplateFill: =RGBA(0, 0, 0, 0)
                         TemplatePadding: =5
-                        TemplateSize: =296
+                        TemplateSize: =316
                         Visible: =!IsEmpty(galCons.AllItems)
                         WrapCount: =2
                       Children:
@@ -341,14 +341,13 @@ Screens:
                             Properties:
                               AccessibleLabel: ="Stock " & Text(ThisItem.qty)
                               Appearance: ='BadgeCanvas.Appearance'.Filled
-                              Content: |-
-                                =If(ThisItem.qty <= 0, "Out of stock", ThisItem.qty < ThisItem.dis_item_v2.min_qty, "Low  ·  " & Text(ThisItem.qty), "Stock " & Text(ThisItem.qty) & " " & Text(ThisItem.dis_item_v2.uom))
+                              Content: =If(ThisItem.qty <= 0, "Out of stock", ThisItem.qty < ThisItem.dis_item_v2.min_qty, "Low stock", "In stock")
                               FontSize: =11
                               FontWeight: =FontWeight.Semibold
                               Height: =24
                               Shape: ='BadgeCanvas.Shape'.Circular
                               ThemeColor: =If(ThisItem.qty <= 0, 'BadgeCanvas.ThemeColor'.Danger, ThisItem.qty < ThisItem.dis_item_v2.min_qty, 'BadgeCanvas.ThemeColor'.Warning, 'BadgeCanvas.ThemeColor'.Success)
-                              Width: =124
+                              Width: =96
                               X: =14
                               Y: =14
                         - txtConsName:
@@ -400,6 +399,24 @@ Screens:
                               Wrap: =false
                               X: =12
                               Y: =218
+                        - txtConsLeft:
+                            Control: ModernText
+                            Properties:
+                              Color: =If(ThisItem.qty <= 0, RGBA(196, 43, 28, 1), ThisItem.qty < ThisItem.dis_item_v2.min_qty, RGBA(188, 118, 0, 1), RGBA(0, 18, 107, 1))
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =20
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =12
+                              Text: |-
+                                ="Stock left " & Text(ThisItem.qty) & " " & Text(ThisItem.dis_item_v2.uom) & If(Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0, "  →  " & Text(ThisItem.qty - Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0)), "")
+                              Width: =Parent.TemplateWidth - 24
+                              Wrap: =false
+                              X: =12
+                              Y: =238
                         - btnConsAdd:
                             Control: ModernButton
                             Properties:
@@ -422,7 +439,7 @@ Screens:
                               Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) <= 0
                               Width: =Parent.TemplateWidth - 24
                               X: =12
-                              Y: =246
+                              Y: =266
                         - btnConsMinus:
                             Control: ModernButton
                             Properties:
@@ -447,7 +464,7 @@ Screens:
                               Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0
                               Width: =40
                               X: =12
-                              Y: =246
+                              Y: =266
                         - numConsQty:
                             Control: ModernNumberInput
                             Properties:
@@ -472,7 +489,7 @@ Screens:
                               Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0
                               Width: =Parent.TemplateWidth - 112
                               X: =56
-                              Y: =246
+                              Y: =266
                         - btnConsPlus:
                             Control: ModernButton
                             Properties:
@@ -498,7 +515,7 @@ Screens:
                               Visible: =Coalesce(LookUp(colConsSel, stockId = ThisItem.dis_stock).amt, 0) > 0
                               Width: =40
                               X: =Parent.TemplateWidth - 52
-                              Y: =246
+                              Y: =266
                   - txtConsEmpty:
                       Control: ModernText
                       Properties:

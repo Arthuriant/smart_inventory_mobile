@@ -6,7 +6,7 @@ ComponentDefinitions:
       ActiveTab:
         PropertyKind: Input
         DisplayName: ActiveTab
-        Description: "Active tab: Consume, Find, History or Dashboard"
+        Description: "Active tab: Consume, History or Dashboard"
         DataType: Text
         Default: =""
     Properties:
@@ -85,58 +85,6 @@ ComponentDefinitions:
                         RadiusTopRight: =0
                         Size: =12
                         Text: ="Consume"
-            - conTbFind:
-                Control: GroupContainer
-                Variant: AutoLayout
-                Properties:
-                  DropShadow: =DropShadow.None
-                  FillPortions: =1
-                  LayoutAlignItems: =LayoutAlignItems.Stretch
-                  LayoutDirection: =LayoutDirection.Vertical
-                  LayoutMinHeight: =0
-                  LayoutMinWidth: =0
-                  RadiusBottomLeft: =0
-                  RadiusBottomRight: =0
-                  RadiusTopLeft: =0
-                  RadiusTopRight: =0
-                Children:
-                  - conTbFindInd:
-                      Control: GroupContainer
-                      Variant: AutoLayout
-                      Properties:
-                        DropShadow: =DropShadow.None
-                        Fill: =If(cmpTabBar.ActiveTab = "Find", RGBA(0, 18, 107, 1), RGBA(0, 0, 0, 0))
-                        FillPortions: =0
-                        Height: =3
-                        LayoutMinHeight: =0
-                        LayoutMinWidth: =0
-                        RadiusBottomLeft: =2
-                        RadiusBottomRight: =2
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
-                  - btnTbFind:
-                      Control: ModernButton
-                      Properties:
-                        AccessibleLabel: ="Open Find"
-                        AlignInContainer: =AlignInContainer.Stretch
-                        Appearance: =ButtonAppearance.Subtle
-                        Color: =If(cmpTabBar.ActiveTab = "Find", RGBA(0, 18, 107, 1), RGBA(100, 112, 130, 1))
-                        FillPortions: =1
-                        Font: =Font.'Segoe UI'
-                        FontWeight: =If(cmpTabBar.ActiveTab = "Find", FontWeight.Bold, FontWeight.Normal)
-                        Icon: ="Search"
-                        IconStyle: =If(cmpTabBar.ActiveTab = "Find", IconStyle.Filled, IconStyle.Outline)
-                        LayoutMinHeight: =44
-                        LayoutMinWidth: =0
-                        OnSelect: =If(cmpTabBar.ActiveTab <> "Find", Navigate(scr_m_find, ScreenTransition.None))
-                        PaddingLeft: =2
-                        PaddingRight: =2
-                        RadiusBottomLeft: =0
-                        RadiusBottomRight: =0
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
-                        Size: =12
-                        Text: ="Find"
             - conTbHist:
                 Control: GroupContainer
                 Variant: AutoLayout

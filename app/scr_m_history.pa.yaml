@@ -3,6 +3,8 @@ Screens:
     Properties:
       Fill: =RGBA(244, 246, 250, 1)
       LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnVisible: |-
+        =UpdateContext({locHistOpen: false})
     Children:
       - conHistRoot:
           Control: GroupContainer
@@ -36,30 +38,455 @@ Screens:
                   FillPortions: =1
                   LayoutAlignItems: =LayoutAlignItems.Stretch
                   LayoutDirection: =LayoutDirection.Vertical
-                  LayoutGap: =12
+                  LayoutGap: =10
                   LayoutMinHeight: =0
                   LayoutMinWidth: =0
-                  PaddingBottom: =16
+                  PaddingBottom: =0
                   PaddingLeft: =16
                   PaddingRight: =16
-                  PaddingTop: =16
+                  PaddingTop: =12
                   RadiusBottomLeft: =0
                   RadiusBottomRight: =0
                   RadiusTopLeft: =0
                   RadiusTopRight: =0
                 Children:
-                  - txtHistSoon:
+                  - conHistSearchRow:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =44
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =4
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - inpHistSearch:
+                            Control: ModernTextInput
+                            Properties:
+                              AccessibleLabel: ="Search transaction number"
+                              Appearance: =Appearance.Outline
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =44
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingLeft: =16
+                              Placeholder: ="Search transaction number"
+                              RadiusBottomLeft: =22
+                              RadiusBottomRight: =22
+                              RadiusTopLeft: =22
+                              RadiusTopRight: =22
+                              Size: =14
+                              TriggerOutput: =TriggerOutput.Delayed
+                              Type: =TextInputType.Search
+                        - btnHistRefresh:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Refresh history"
+                              Appearance: =ButtonAppearance.Subtle
+                              Color: =RGBA(0, 18, 107, 1)
+                              Height: =44
+                              Icon: ="ArrowSync"
+                              Layout: =ButtonLayout.IconOnly
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: =Refresh(dis_trx_headers)
+                              RadiusBottomLeft: =22
+                              RadiusBottomRight: =22
+                              RadiusTopLeft: =22
+                              RadiusTopRight: =22
+                              Size: =18
+                              Text: ="Refresh history"
+                              Width: =44
+                  - conHistTypeRow:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =34
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =6
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - btnHistTypeAll:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="All types"
+                              Appearance: =If(IsBlank(locHistType), ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistType: Blank()})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="All"
+
+                        - btnHistTypeCons:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Consume only"
+                              Appearance: =If(locHistType = 'type (dis_trx_headers)'.Consume, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistType: 'type (dis_trx_headers)'.Consume})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="Consume"
+
+                        - btnHistTypeRecv:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Receive only"
+                              Appearance: =If(locHistType = 'type (dis_trx_headers)'.Receive, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistType: 'type (dis_trx_headers)'.Receive})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="Receive"
+
+                        - btnHistTypeTrf:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Transfer only"
+                              Appearance: =If(locHistType = 'type (dis_trx_headers)'.Transfer, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistType: 'type (dis_trx_headers)'.Transfer})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="Transfer"
+                  - conHistDayRow:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =34
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =6
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - btnHistDay1:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Today"
+                              Appearance: =If(Coalesce(locHistDays, 30) = 1, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistDays: 1})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="Today"
+
+                        - btnHistDay7:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Last 7 days"
+                              Appearance: =If(Coalesce(locHistDays, 30) = 7, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistDays: 7})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="7 days"
+
+                        - btnHistDay30:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Last 30 days"
+                              Appearance: =If(Coalesce(locHistDays, 30) = 30, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistDays: 30})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="30 days"
+
+                        - btnHistDay90:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Last 90 days"
+                              Appearance: =If(Coalesce(locHistDays, 30) = 90, ButtonAppearance.Primary, ButtonAppearance.Outline)
+                              BasePaletteColor: =RGBA(0, 18, 107, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistDays: 90})
+                              RadiusBottomLeft: =17
+                              RadiusBottomRight: =17
+                              RadiusTopLeft: =17
+                              RadiusTopRight: =17
+                              Size: =12
+                              Text: ="90 days"
+                  - txtHistCount:
+                      Control: ModernText
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =RGBA(100, 112, 130, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =20
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        PaddingBottom: =0
+                        PaddingLeft: =4
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: |-
+                          =Text(galHist.AllItemsCount) & " transaction(s)  ·  " & If(Coalesce(locHistDays, 30) = 1, "today", "last " & Text(Coalesce(locHistDays, 30)) & " days")
+                        Wrap: =false
+                  - galHist:
+                      Control: Gallery
+                      Variant: Vertical
+                      Properties:
+                        AccessibleLabel: ="Transaction history"
+                        FillPortions: =1
+                        Items: |-
+                          =Filter(
+                              // Server side (delegable): period, type, number search; newest first
+                              Sort(
+                                  Filter(
+                                      dis_trx_headers,
+                                      'Created On' >= DateAdd(Today(), -(Coalesce(locHistDays, 30) - 1), TimeUnit.Days),
+                                      IsBlank(locHistType) Or type = locHistType,
+                                      IsBlank(inpHistSearch.Text) Or StartsWith(transaction_number, inpHistSearch.Text)
+                                  ),
+                                  'Created On',
+                                  SortOrder.Descending
+                              ),
+                              // Local: only transactions touching an area of the user's business line
+                              area_form.dis_area in nfMyAreaIds Or area_to.dis_area in nfMyAreaIds
+                          )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Selectable: =false
+                        ShowScrollbar: =false
+                        TemplateFill: =RGBA(0, 0, 0, 0)
+                        TemplatePadding: =5
+                        TemplateSize: =108
+                        Visible: =!IsEmpty(galHist.AllItems)
+                      Children:
+                        - conHistCard:
+                            Control: GroupContainer
+                            Variant: ManualLayout
+                            Properties:
+                              BorderColor: =RGBA(226, 230, 239, 1)
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =RGBA(255, 255, 255, 1)
+                              Height: =Parent.TemplateHeight
+                              RadiusBottomLeft: =14
+                              RadiusBottomRight: =14
+                              RadiusTopLeft: =14
+                              RadiusTopRight: =14
+                              Width: =Parent.TemplateWidth
+                              X: =0
+                              Y: =0
+                        - txtHistNo:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(31, 41, 55, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =24
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =15
+                              Text: =ThisItem.transaction_number
+                              Width: =Parent.TemplateWidth - 210
+                              Wrap: =false
+                              X: =16
+                              Y: =14
+                        - txtHistDate:
+                            Control: ModernText
+                            Properties:
+                              Align: =Align.Right
+                              Color: =RGBA(100, 112, 130, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =24
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =12
+                              Text: =Text(ThisItem.'Created On', "dd mmm yyyy, hh:mm")
+                              Width: =170
+                              Wrap: =false
+                              X: =Parent.TemplateWidth - 186
+                              Y: =14
+                        - bdgHistType:
+                            Control: Badge
+                            Properties:
+                              AccessibleLabel: ="Type " & Text(ThisItem.type)
+                              Appearance: ='BadgeCanvas.Appearance'.Tint
+                              Content: =Text(ThisItem.type)
+                              FontSize: =12
+                              FontWeight: =FontWeight.Semibold
+                              Height: =24
+                              Shape: ='BadgeCanvas.Shape'.Circular
+                              ThemeColor: =Switch(Text(ThisItem.type), "Receive", 'BadgeCanvas.ThemeColor'.Success, "Consume", 'BadgeCanvas.ThemeColor'.Warning, "Transfer", 'BadgeCanvas.ThemeColor'.Brand, 'BadgeCanvas.ThemeColor'.Subtle)
+                              Width: =92
+                              X: =16
+                              Y: =46
+                        - txtHistRoute:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(31, 41, 55, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =24
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =12
+                              Text: |-
+                                =If(ThisItem.type = 'type (dis_trx_headers)'.Receive, "Received", Coalesce(ThisItem.area_form.Name, "-")) & "  →  " & If(ThisItem.type = 'type (dis_trx_headers)'.Consume, "Consumed", Coalesce(ThisItem.area_to.Name, "-"))
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =Parent.TemplateWidth - 180
+                              Wrap: =false
+                              X: =118
+                              Y: =46
+                        - txtHistBy:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(100, 112, 130, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =20
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =11
+                              Text: ="By " & Coalesce(ThisItem.'Created By'.'Full Name', "-")
+                              Width: =Parent.TemplateWidth - 80
+                              Wrap: =false
+                              X: =16
+                              Y: =78
+                        - btnHistChev:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open " & ThisItem.transaction_number
+                              Appearance: =ButtonAppearance.Subtle
+                              Color: =RGBA(100, 112, 130, 1)
+                              Height: =40
+                              Icon: ="ChevronRight"
+                              Layout: =ButtonLayout.IconOnly
+                              OnSelect: |-
+                                =UpdateContext({locHistSel: ThisItem, locHistOpen: true})
+                              Size: =16
+                              Text: ="Open"
+                              Width: =40
+                              X: =Parent.TemplateWidth - 52
+                              Y: =50
+                        - btnHistOpen:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open transaction " & ThisItem.transaction_number
+                              Appearance: =ButtonAppearance.Transparent
+                              Height: =Parent.TemplateHeight
+                              Layout: =ButtonLayout.TextOnly
+                              OnSelect: |-
+                                =UpdateContext({locHistSel: ThisItem, locHistOpen: true})
+                              Text: =""
+                              Width: =Parent.TemplateWidth - 60
+                              X: =0
+                              Y: =0
+                  - txtHistEmpty:
                       Control: ModernText
                       Properties:
                         Align: =Align.Center
                         AlignInContainer: =AlignInContainer.Stretch
                         Color: =RGBA(100, 112, 130, 1)
+                        FillPortions: =1
                         Font: =Font.'Segoe UI'
-                        Height: =60
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         Size: =14
-                        Text: ="History screen is under construction."
+                        Text: ="No transactions for this filter."
+                        Visible: =IsEmpty(galHist.AllItems)
             - cmpHistTabBar:
                 Control: CanvasComponent
                 ComponentName: cmpTabBar
@@ -69,3 +496,224 @@ Screens:
                   Height: =72
                   LayoutMinHeight: =72
                   LayoutMinWidth: =0
+      - conHistDlg:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(0, 0, 0, 0.45)
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Visible: =locHistOpen
+            Width: =Parent.Width
+          Children:
+            - conHistSheet:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Fill: =RGBA(255, 255, 255, 1)
+                  FillPortions: =0
+                  Height: =Parent.Height * 0.75
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =10
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  PaddingBottom: =20
+                  PaddingLeft: =20
+                  PaddingRight: =20
+                  PaddingTop: =10
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
+                Children:
+                  - conHistHandle:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Center
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(209, 213, 219, 1)
+                        FillPortions: =0
+                        Height: =4
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =2
+                        RadiusBottomRight: =2
+                        RadiusTopLeft: =2
+                        RadiusTopRight: =2
+                        Width: =44
+                  - conHistDlgHead:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =40
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - txtHistDlgTitle:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(31, 41, 55, 1)
+                              FillPortions: =1
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =32
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =20
+                              Text: =locHistSel.transaction_number
+                              Wrap: =false
+                        - btnHistDlgClose:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Close"
+                              Appearance: =ButtonAppearance.Subtle
+                              Color: =RGBA(100, 112, 130, 1)
+                              Height: =40
+                              Icon: ="Dismiss"
+                              Layout: =ButtonLayout.IconOnly
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              OnSelect: |-
+                                =UpdateContext({locHistOpen: false})
+                              RadiusBottomLeft: =20
+                              RadiusBottomRight: =20
+                              RadiusTopLeft: =20
+                              RadiusTopRight: =20
+                              Size: =16
+                              Text: ="Close"
+                              Width: =40
+                  - txtHistDlgSub:
+                      Control: ModernText
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =RGBA(100, 112, 130, 1)
+                        Font: =Font.'Segoe UI'
+                        Height: =40
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =13
+                        Text: |-
+                          =Text(locHistSel.type) & "  ·  " & Text(locHistSel.'Created On', "dd mmm yyyy, hh:mm") & Char(10) & If(locHistSel.type = 'type (dis_trx_headers)'.Receive, "Received", Coalesce(locHistSel.area_form.Name, "-")) & "  →  " & If(locHistSel.type = 'type (dis_trx_headers)'.Consume, "Consumed", Coalesce(locHistSel.area_to.Name, "-"))
+                  - txtHistDlgItems:
+                      Control: ModernText
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =RGBA(31, 41, 55, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =22
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =13
+                        Text: ="Items (" & Text(galHistItems.AllItemsCount) & ")"
+                        Wrap: =false
+                  - galHistItems:
+                      Control: Gallery
+                      Variant: Vertical
+                      Properties:
+                        AccessibleLabel: ="Transaction items"
+                        Fill: =RGBA(226, 230, 239, 1)
+                        FillPortions: =1
+                        Items: =Filter(dis_trx_details, header_id.dis_trx_header = locHistSel.dis_trx_header)
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Selectable: =false
+                        TemplateFill: =RGBA(255, 255, 255, 1)
+                        TemplatePadding: =1
+                        TemplateSize: =66
+                      Children:
+                        - imgHistItem:
+                            Control: Image
+                            Properties:
+                              AccessibleLabel: ="Photo " & ThisItem.item.name
+                              Fill: =RGBA(244, 246, 250, 1)
+                              Height: =48
+                              HoverFill: =RGBA(244, 246, 250, 1)
+                              Image: =ThisItem.item.Image
+                              ImagePosition: =ImagePosition.Fit
+                              PressedFill: =RGBA(244, 246, 250, 1)
+                              RadiusBottomLeft: =8
+                              RadiusBottomRight: =8
+                              RadiusTopLeft: =8
+                              RadiusTopRight: =8
+                              Width: =48
+                              X: =8
+                              Y: =(Parent.TemplateHeight - Self.Height) / 2
+                        - txtHistItem:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(31, 41, 55, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =48
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =13
+                              Text: =ThisItem.item.name & Char(10) & "BPN " & Coalesce(ThisItem.item.part_number, "-")
+                              Width: =Parent.TemplateWidth - 176
+                              X: =68
+                              Y: =(Parent.TemplateHeight - Self.Height) / 2
+                        - txtHistQty:
+                            Control: ModernText
+                            Properties:
+                              Align: =Align.Right
+                              Color: |-
+                                =Switch(Text(locHistSel.type), "Consume", RGBA(196, 43, 28, 1), "Receive", RGBA(16, 124, 65, 1), RGBA(0, 18, 107, 1))
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =28
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =15
+                              Text: |-
+                                =Switch(Text(locHistSel.type), "Consume", "−", "Receive", "+", "") & Text(ThisItem.qty) & " " & Text(ThisItem.item.uom)
+                              Width: =96
+                              Wrap: =false
+                              X: =Parent.TemplateWidth - Self.Width - 12
+                              Y: =(Parent.TemplateHeight - Self.Height) / 2
+                  - txtHistItemsEmpty:
+                      Control: ModernText
+                      Properties:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =RGBA(100, 112, 130, 1)
+                        Font: =Font.'Segoe UI'
+                        Height: =40
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =13
+                        Text: ="No items in this transaction."
+                        Visible: =IsEmpty(galHistItems.AllItems)
