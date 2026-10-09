@@ -1,6 +1,6 @@
 # Rencana App Mobile Teknisi
 
-Status: langkah 1 selesai (2026-10-09). Ubah dokumen ini kalau user memutuskan lain.
+Status: langkah 1-2 selesai (2026-10-09). Ubah dokumen ini kalau user memutuskan lain.
 
 ## Yang sudah ada
 - App.Formulas: nfMe, nfIsAdmin, nfMyBl, nfMyAreas, nfMyAreaIds, nfLowStock, `nfHasAccess` (terdaftar DAN punya BL),
@@ -13,6 +13,10 @@ Status: langkah 1 selesai (2026-10-09). Ubah dokumen ini kalau user memutuskan l
 - `scr_m_noaccess` (prefix Na): pesan beda untuk belum terdaftar / belum punya BL, daftar admin + tombol email, tombol
   "Check again" (Refresh dis_users, lalu ke Consume kalau akses sudah ada).
 - Screen1 bawaan masih ada (tidak terpakai): hapus manual di Studio.
+- `scr_m_consume`: search + reset/refresh, dropdown Category & Area, galeri kartu (`galCons`, posisi X/Y tanpa
+  container di baris) dengan stepper - / angka / +. Pilihan qty disimpan di koleksi `colConsSel {stockId, amt}` (tetap
+  ada saat filter berubah/pindah tab). Bar bawah `conConsBar` (ringkasan, Clear, Consume) -> lembar konfirmasi
+  `conConsDlg` (`locConsConfirm`) berisi daftar item; tombol `btnConsDlgOk` = logika kontrak (stok dibaca terbaru).
 
 ## Tujuan
 Teknisi di lapangan bisa: mengambil (consume) barang dari stok area BL-nya, mencari barang, melihat riwayat, dan
@@ -40,13 +44,13 @@ StartScreen: `If(nfHasAccess, scr_m_consume, scr_m_noaccess)`.
 
 ## Urutan kerja (satu screen per sesi)
 1. ~~App.pa.yaml (Formulas RBAC + palet, StartScreen) + komponen tab bar + `scr_m_noaccess`~~ (selesai)
-2. `scr_m_consume`
+2. ~~`scr_m_consume`~~ (selesai)
 3. `scr_m_find`
 4. `scr_m_history`
 5. `scr_m_dashboard`
 6. Uji di HP (aplikasi Power Apps mobile), publish.
 
 ## Pertanyaan terbuka (tanya user saat mulai)
-- Consume perlu konfirmasi sebelum simpan (dialog "Consume n item?")? Saran: ya.
+- ~~Konfirmasi sebelum Consume~~: dibuat (lembar konfirmasi); hapus kalau user tidak mau.
 - Dashboard untuk teknisi: KPI apa yang paling berguna?
 - Perlu scan barcode (BarcodeReader) untuk mencari item? Bisa ditambah nanti.

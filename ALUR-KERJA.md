@@ -28,3 +28,8 @@ Format: `- [tanggal] file yang diubah | ringkasan | status: belum compile / comp
   screen noaccess (pesan, daftar admin + email, Check again); 4 screen tab berisi header/body placeholder/tab bar supaya
   Navigate bisa dicompile. | status: compile OK (sync ulang: hanya beda properti default) | cek manual: Save di Studio,
   hapus Screen1, cek tab bar (warna aktif, ikon), uji Check again.
+- [2026-10-09] scr_m_consume.pa.yaml | Langkah 2: Consume mobile - filter (search, Category, Area, reset, refresh),
+  kartu stok dengan stepper (koleksi colConsSel), bar bawah ringkasan + Clear + Consume, lembar konfirmasi berisi daftar
+  item; simpan = logika kontrak desktop. Compile pertama gagal (YamlInvalidSyntax: UpdateContext({x: y}) satu baris,
+  aturan #8) -> pakai |-. | status: compile OK; App Checker: 1 peringatan ForAllWithMutation (pola kontrak, dibiarkan)
+  | cek manual: Save; uji stepper +/-, ketik qty, qty > stok, filter lalu Consume, cek header per area & stok berkurang.
